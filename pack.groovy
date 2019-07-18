@@ -13,7 +13,7 @@ pipeline {
                 }
             }
         }
-        stage('打包') {
+        stage('maven构建') {
             tools {
                 maven 'maven3.6.1'
                 jdk 'jdk8_161'
@@ -23,6 +23,24 @@ pipeline {
                     dir(env.ci_dir) {
                         echo "开始maven构建"
                         sh 'mvn clean install -DskipTests'
+                    }
+                }
+            }
+        }
+        stage('docker打包') {
+            steps {
+                script {
+                    dir(env.ci_dir) {
+                        echo "开始docker打包"
+                    }
+                }
+            }
+        }
+        stage('镜像推送') {
+            steps {
+                script {
+                    dir(env.ci_dir) {
+                        echo "镜像推送"
                     }
                 }
             }
