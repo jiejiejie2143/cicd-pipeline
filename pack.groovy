@@ -36,11 +36,20 @@ pipeline {
                 }
             }
         }
-        stage('镜像推送') {
+        stage('推送仓库') {
             steps {
                 script {
                     dir(env.ci_dir) {
-                        echo "镜像推送"
+                        echo "镜像推送至阿里云仓库"
+                    }
+                }
+            }
+        }
+        stage('镜像部署') {
+            steps {
+                script {
+                    dir(env.ci_dir) {
+                        echo "镜像部署至k8s"
                     }
                 }
             }
