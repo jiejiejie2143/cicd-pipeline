@@ -18,11 +18,12 @@ pipeline {
             }
         }
         stage('打包') {
-                script {
-                    dir(env.ci_dir) {
-                        echo "开始maven构建"
-                        sh 'mvn clean install -DskipTests'
-                    }
+            script {
+                dir(env.ci_dir) {
+                    echo "开始maven构建"
+                    sh 'mvn clean install -DskipTests'
+                }
+            }
         }
     }
 }
