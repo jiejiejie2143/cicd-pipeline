@@ -3,10 +3,6 @@ pipeline {
     
     stages {
         stage('拉取gitlab代码') {
-            tools {
-                maven 'maven3.6.1'
-                jdk 'jdk8_161'
-            }
             steps {
                 script {
                     env.ci_dir =  env.JOB_BASE_NAME+'-ci'
@@ -18,6 +14,10 @@ pipeline {
             }
         }
         stage('打包') {
+            tools {
+                maven 'maven3.6.1'
+                jdk 'jdk8_161'
+            }
             steps {
                 script {
                     dir(env.ci_dir) {
