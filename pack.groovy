@@ -9,7 +9,7 @@ pipeline {
             }
             steps {
                 script {
-                    dir(test) {
+                    dir(env.JOB_BASE_NAME) {
                         def git_repository = 'http://10.9.52.243:8088/cloud/ml-auth.git'
                         def git_branch = master
                         echo "开始拉取git代码"
