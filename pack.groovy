@@ -9,7 +9,8 @@ pipeline {
             }
             steps {
                 script {
-                    dir(env.JOB_BASE_NAME) {
+                    env.ci_dir =  env.JOB_BASE_NAME+'-ci'
+                    dir(env.ci_dir) {
                         echo "开始拉取git代码"
                         checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'yanjie', url: 'http://10.9.52.243:8088/cloud/ml-auth.git']]])                       
                     }
