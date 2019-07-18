@@ -10,7 +10,7 @@ pipeline {
             steps {
                 script {
                     dir(test) {
-                        def git_repository = http://10.9.52.243:8088/cloud/ml-auth.git
+                        def git_repository = 'http://10.9.52.243:8088/cloud/ml-auth.git'
                         def git_branch = master
                         echo "开始拉取git代码"
                         checkout([$class: 'GitSCM', branches: [[name: git_branch]], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'CleanBeforeCheckout']], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'yanjie', url: git_repository]]])                        
