@@ -41,9 +41,9 @@ pipeline {
                 script {
                     dir(env.ci_dir) {
                         echo "开始docker打包"
+                        sh './init.sh'+' '+env.appinfo+' '+env.app_name
                         sh 'mv ../Dockerfile .'
-                        def tag = env.app_name+':'+env.BUILD_NUMBER+' .'
-                        sh 'docker build -t registry.cn-hangzhou.aliyuncs.com/ml_test/'+tag
+                        sh 'docker build -t registry.cn-hangzhou.aliyuncs.com/ml_test/'+env.app_name+':'+env.BUILD_NUMBER+' .'
                     }
                 }
             }
@@ -54,8 +54,7 @@ pipeline {
                     dir(env.ci_dir) {
                         echo "镜像推送至阿里云仓库"
                         sh 'docker login registry.cn-hangzhou.aliyuncs.com'
-                        def tag = env.app_name+':'+env.BUILD_NUMBER
-                        sh 'docker push registry.cn-hangzhou.aliyuncs.com/ml_test/'+tag
+                        sh 'docker push registry.cn-hangzhou.aliyuncs.com/ml_test/'+env.app_name+':'+env.BUILD_NUMBER
                     }
                 }
             }
@@ -65,8 +64,7 @@ pipeline {
                 script {
                     dir(env.ci_dir) {
                         echo "镜像部署至k8s"
-                        def tag = env.app_name+':'+env.BUILD_NUMBER
-                        sh 'docker rmi registry.cn-hangzhou.aliyuncs.com/ml_test/'+tag
+                        sh 'docker rmi registry.cn-hangzhou.aliyuncs.com/ml_test/'+env.app_name+':'+env.BUILD_NUMBER
                     }
                 }
             }
