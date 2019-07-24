@@ -5,10 +5,19 @@ pipeline {
         stage('拉取gitlab代码') {
             steps {
                 script {
-                    env.ci_dir =  env.JOB_BASE_NAME+'-ci'
+                    env.project = env.JOB_BASE_NAME.tokenize('+')[0]
+                    env.app_name = env.JOB_BASE_NAME.tokenize('+')[1]
+                    env.branch = env.JOB_BASE_NAME.tokenize('+')[2]
+                    env.appinfo = env.JOB_BASE_NAME.tokenize('+')[3]
+                    env.ci_dir =  env.app_name+'-ci'
+                    sh 'mkdir -pv '+env.ci_dir
+                    
+                    def git_repository = sh returnStdout: true, script: 'cat programs/'+env.project+'/program_paras|grep '+env.app_name+'_program|awk -F "=" \'{print $2}\''
+                    def git_branch = env.branch
+                    
                     dir(env.ci_dir) {
                         echo "开始拉取git代码"
-                        checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'yanjie', url: 'http://10.9.52.243:8088/cloud/ml-auth.git']]])                       
+                        checkout([$class: 'GitSCM', branches: [[name: git_branch]], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'yanjie', url: 'http://10.9.52.243:8088/cloud/ml-auth.git']]])                       
                     }
                 }
             }
@@ -32,6 +41,7 @@ pipeline {
                 script {
                     dir(env.ci_dir) {
                         echo "开始docker打包"
+                        
                     }
                 }
             }
