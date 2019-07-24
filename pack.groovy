@@ -42,7 +42,6 @@ pipeline {
                     dir(env.ci_dir) {
                         echo "开始docker打包"
                         sh 'bash ../init.sh'+' '+env.appinfo+' '+env.app_name
-                        sh 'mv ../Dockerfile .'
                         sh 'docker build -t registry.cn-hangzhou.aliyuncs.com/ml_test/'+env.app_name+':'+env.BUILD_NUMBER+' .'
                     }
                 }
