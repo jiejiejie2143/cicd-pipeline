@@ -42,7 +42,7 @@ pipeline {
                     dir(env.ci_dir) {
                         echo "开始docker打包"
                         sh 'mv ../Dockerfile .'
-                        def tag = env.app_name+':'+env.BUILD_NUMBER +'.'
+                        def tag = env.app_name+':'+env.BUILD_NUMBER+' .'
                         sh 'docker build -t registry.cn-hangzhou.aliyuncs.com/ml_test/'+tag
                     }
                 }
@@ -54,7 +54,7 @@ pipeline {
                     dir(env.ci_dir) {
                         echo "镜像推送至阿里云仓库"
                         sh 'docker login registry.cn-hangzhou.aliyuncs.com'
-                        def tag = env.app_name+':'+env.BUILD_NUMBER +'.'
+                        def tag = env.app_name+':'+env.BUILD_NUMBER+' .'
                         sh 'docker push registry.cn-hangzhou.aliyuncs.com/ml_test/'+tag
                     }
                 }
