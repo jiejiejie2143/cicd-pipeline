@@ -58,7 +58,8 @@ pipeline {
                             error env_appinfo+'项目参数错误，请检查打包的语言类型'
                         }
                         echo source_Files
-                        def cmd_exe = 'ls /data'
+                        def cmd_exe = '''ls /data
+ls /data/jenkins'''
                         sshPublisher(publishers: [sshPublisherDesc(configName: '114.55.42.166--jenkins_proxy（admin）', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: """$cmd_exe""", execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: env.project, remoteDirectorySDF: false, removePrefix: 'target/', sourceFiles: source_Files)], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
                     }
                 }
