@@ -1,4 +1,4 @@
 #ml-auth
-ml-auth_apollo='-Denv=FAT'
+ml-auth_apollo+'-Denv=FAT'
 ml-auth_addr='192.168.1.10 192.168.1.11'
 

@@ -42,9 +42,9 @@ pipeline {
         stage('远程部署') {
             steps {
                 script {
-                        echo "文件传输至跳板机 "
+                        echo "文件传输至跳板机"
                         def self_appinfo = sh returnStdout: true, script: 'cat programs/'+env.project+'/program_paras|grep '+env.app_name+'_appinfo|awk -F "=" \'{print $2}\''
-                        def self_apollo = sh returnStdout: true, script: 'cat programs/'+env.project+'/'+env.appenv+'_paras|grep '+env.app_name+'_apollo|awk -F "=" \'{print $2}\''
+                        def self_apollo = sh returnStdout: true, script: 'cat programs/'+env.project+'/'+env.appenv+'_paras|grep '+env.app_name+'_apollo|awk -F "+" \'{print $2}\''
                         def self_addr = sh returnStdout: true, script: 'cat programs/'+env.project+'/'+env.appenv+'_paras|grep '+env.app_name+'_addr|awk -F "=" \'{print $2}\''
                         echo self_appinfo
                         echo self_apollo
