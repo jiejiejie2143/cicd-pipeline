@@ -14,7 +14,14 @@ pipeline {
                     
                     def git_repository = sh returnStdout: true, script: 'cat programs/'+env.project+'/program_paras|grep '+env.app_name+'_program|awk -F "=" \'{print $2}\''
                     def git_branch = env.branch
-                    
+
+                    env.appinfo = sh returnStdout: true, script: 'cat ../programs/'+env.project+'/program_paras|grep '+env.app_name+'_appinfo|awk -F "=" \'{print $2}\''
+                    env.appinfo = env.appinfo.tokenize('\n')[0]
+                    env.apollo = sh returnStdout: true, script: 'cat ../programs/'+env.project+'/'+env.appenv+'_paras|grep '+env.app_name+'_apollo|awk -F "&" \'{print $2}\''
+                    env.apollo = env.apollo.tokenize('\n')[0]
+                    env.addr = sh returnStdout: true, script: 'cat ../programs/'+env.project+'/'+env.appenv+'_paras|grep '+env.app_name+'_addr|awk -F "=" \'{print $2}\''
+                    env.addr = env.addr.tokenize('\n')[0]
+
                     dir(env.ci_dir) {
                         echo "开始拉取git代码"
                         checkout([$class: 'GitSCM', branches: [[name: git_branch]], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'CleanBeforeCheckout']], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'bdf54155-8605-461e-891c-6eabacf536b8', url: git_repository]]])
@@ -31,7 +38,13 @@ pipeline {
                 script {
                     dir(env.ci_dir) {
                         echo "开始maven构建"
-                        sh 'mvn clean install -DskipTests'
+                        if (env.appinfo == 'jar'||env.appinfo == 'war')  {
+                            sh 'mvn clean install -DskipTests'
+                        } else if (env.appinfo == 'deploy')  {
+                            sh 'clean install deploy'
+                        } else {
+                            error env.appinfo+'类型参数错误，请检查打包的语言类型'
+                        }
                     }
                 }
             }
@@ -41,22 +54,10 @@ pipeline {
                 script {
                     dir(env.ci_dir) {
                         echo "文件传输至跳板机"
-                        def env_appinfo = sh returnStdout: true, script: 'cat ../programs/'+env.project+'/program_paras|grep '+env.app_name+'_appinfo|awk -F "=" \'{print $2}\''
-                        env_appinfo = env_appinfo.tokenize('\n')[0]
-                        def env_apollo = sh returnStdout: true, script: 'cat ../programs/'+env.project+'/'+env.appenv+'_paras|grep '+env.app_name+'_apollo|awk -F "&" \'{print $2}\''
-                        env_apollo = env_apollo.tokenize('\n')[0]
-                        def env_addr = sh returnStdout: true, script: 'cat ../programs/'+env.project+'/'+env.appenv+'_paras|grep '+env.app_name+'_addr|awk -F "=" \'{print $2}\''
-                        env_addr = env_addr.tokenize('\n')[0]
-                        echo env_appinfo
-                        echo env_apollo
-                        echo env_addr
-                        if (env_appinfo == 'war') {
-                            source_Files = 'target/'+env.app_name+'.war'
-                        } else if (env_appinfo == 'jar')  {
-                            source_Files = 'target/'+env.app_name+'.jar'
-                        } else {
-                            error env_appinfo+'项目参数错误，请检查打包的语言类型'
-                        }
+                        echo env.appinfo
+                        echo env.apollo
+                        echo env.addr
+                        source_Files = 'target/'+env.app_name+'.'+env.appinfo
                         echo source_Files
                         def cmd_exe = '''ls /data
 ls /data/jenkins'''
