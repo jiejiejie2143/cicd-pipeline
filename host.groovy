@@ -47,7 +47,7 @@ pipeline {
                         echo env.appinfo
                         echo env.apollo
                         echo env.addr
-                        def source_Files = 'target/'+env.app_name+env.appinfo
+                        def source_Files = 'target/'+env.app_name+'.war'
                         echo source_Files
                         sshPublisher(publishers: [sshPublisherDesc(configName: '114.55.42.166--jenkins_proxy（admin）', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '''ls /data''', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: env.project, remoteDirectorySDF: false, removePrefix: 'target/', sourceFiles: source_Files )], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
                     }
