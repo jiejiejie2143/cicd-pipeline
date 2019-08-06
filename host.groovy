@@ -44,9 +44,9 @@ pipeline {
                         def env_appinfo = sh returnStdout: true, script: 'cat ../programs/'+env.project+'/program_paras|grep '+env.app_name+'_appinfo|awk -F "=" \'{print $2}\''
                         def env_apollo = sh returnStdout: true, script: 'cat ../programs/'+env.project+'/'+env.appenv+'_paras|grep '+env.app_name+'_apollo|awk -F "&" \'{print $2}\''
                         def env_addr = sh returnStdout: true, script: 'cat ../programs/'+env.project+'/'+env.appenv+'_paras|grep '+env.app_name+'_addr|awk -F "=" \'{print $2}\''
-                        echo env_appinfo
-                        echo env_apollo
-                        echo env_addr
+                        echo env_appinfo+"文件传输至跳板机"
+                        echo env_apollo+"文件传输至跳板机"
+                        echo env_addr+"文件传输至跳板机"
                         if (env_appinfo == 'war') {
                             source_Files = 'target/'+env.app_name+'.war'
                         } else if (env_appinfo == 'jar')  {
