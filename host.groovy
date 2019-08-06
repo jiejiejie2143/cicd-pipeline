@@ -44,7 +44,9 @@ pipeline {
                         def env_appinfo = sh returnStdout: true, script: 'cat ../programs/'+env.project+'/program_paras|grep '+env.app_name+'_appinfo|awk -F "=" \'{print $2}\''
                         env_appinfo = env_appinfo.tokenize('\n')[0]
                         def env_apollo = sh returnStdout: true, script: 'cat ../programs/'+env.project+'/'+env.appenv+'_paras|grep '+env.app_name+'_apollo|awk -F "&" \'{print $2}\''
+                        env_apollo = env_apollo.tokenize('\n')[0]
                         def env_addr = sh returnStdout: true, script: 'cat ../programs/'+env.project+'/'+env.appenv+'_paras|grep '+env.app_name+'_addr|awk -F "=" \'{print $2}\''
+                        env_addr = env_addr.tokenize('\n')[0]
                         echo env_appinfo + "文件传输至跳板机"
                         echo env_apollo+"文件传输至跳板机"
                         echo env_addr+"文件传输至跳板机"
