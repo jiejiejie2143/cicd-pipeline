@@ -8,11 +8,14 @@ pipeline {
                     env.project = env.JOB_BASE_NAME.tokenize('+')[0]
                     env.app_name = env.JOB_BASE_NAME.tokenize('+')[1]
                     env.branch = env.JOB_BASE_NAME.tokenize('+')[2]
-                    env.appinfo = env.JOB_BASE_NAME.tokenize('+')[3]
+                    env.appenv = env.JOB_BASE_NAME.tokenize('+')[3]
                     env.ci_dir =  env.app_name+'-ci'
                     sh 'mkdir -pv '+env.ci_dir
                     
                     def git_repository = sh returnStdout: true, script: 'cat programs/'+env.project+'/program_paras|grep '+env.app_name+'_program|awk -F "=" \'{print $2}\''
+                    def env_appinfo = sh returnStdout: true, script: 'cat programs/'+env.project+'/program_paras|grep '+env.app_name+'_appinfo|awk -F "=" \'{print $2}\''
+                    def env_apollo = sh returnStdout: true, script: 'cat programs/'+env.project+'/'+env.appenv+'_paras|grep '+env.app_name+'_apollo|awk -F "=" \'{print $2}\''
+                    def env_addr = sh returnStdout: true, script: 'cat programs/'+env.project+'/'+env.appenv+'_paras|grep '+env.app_name+'_addr|awk -F "=" \'{print $2}\''
                     def git_branch = env.branch
                     
                     dir(env.ci_dir) {
@@ -24,8 +27,8 @@ pipeline {
         }
         stage('maven构建') {
             tools {
-                maven 'maven3.6.1'
-                jdk 'jdk8_161'
+                maven 'maven3.0.5'
+                jdk 'jdk8'
             }
             steps {
                 script {
@@ -36,34 +39,14 @@ pipeline {
                 }
             }
         }
-        stage('docker打包') {
+        stage('远程部署') {
             steps {
                 script {
                     dir(env.ci_dir) {
-                        echo "开始docker打包"
-                        sh 'bash ../init.sh'+' '+env.appinfo+' '+env.app_name
-                        sh 'docker build -t registry.cn-hangzhou.aliyuncs.com/ml_test/'+env.app_name+':'+env.BUILD_NUMBER+' .'
-                    }
-                }
-            }
-        }
-        stage('推送仓库') {
-            steps {
-                script {
-                    dir(env.ci_dir) {
-                        echo "镜像推送至阿里云仓库"
-                        sh 'docker login registry.cn-hangzhou.aliyuncs.com'
-                        sh 'docker push registry.cn-hangzhou.aliyuncs.com/ml_test/'+env.app_name+':'+env.BUILD_NUMBER
-                    }
-                }
-            }
-        }
-        stage('镜像部署') {
-            steps {
-                script {
-                    dir(env.ci_dir) {
-                        echo "镜像部署至k8s"
-                        sh 'docker rmi registry.cn-hangzhou.aliyuncs.com/ml_test/'+env.app_name+':'+env.BUILD_NUMBER
+                        echo "文件传输至跳板机"
+                        echo env_appinfo
+                        echo env_apollo
+                        echo env_addr
                     }
                 }
             }
