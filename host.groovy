@@ -47,9 +47,9 @@ pipeline {
                         env_apollo = env_apollo.tokenize('\n')[0]
                         def env_addr = sh returnStdout: true, script: 'cat ../programs/'+env.project+'/'+env.appenv+'_paras|grep '+env.app_name+'_addr|awk -F "=" \'{print $2}\''
                         env_addr = env_addr.tokenize('\n')[0]
-                        echo env_appinfo + "文件传输至跳板机"
-                        echo env_apollo+"文件传输至跳板机"
-                        echo env_addr+"文件传输至跳板机"
+                        echo env_appinfo
+                        echo env_apollo
+                        echo env_addr+
                         if (env_appinfo == 'war') {
                             source_Files = 'target/'+env.app_name+'.war'
                         } else if (env_appinfo == 'jar')  {
@@ -58,7 +58,8 @@ pipeline {
                             error env_appinfo+'项目参数错误，请检查打包的语言类型'
                         }
                         echo source_Files
-                        sshPublisher(publishers: [sshPublisherDesc(configName: '114.55.42.166--jenkins_proxy（admin）', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '''ls /data''', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: env.project, remoteDirectorySDF: false, removePrefix: 'target/', sourceFiles: source_Files)], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
+                        cmd_exe = 'ls /data'
+                        sshPublisher(publishers: [sshPublisherDesc(configName: '114.55.42.166--jenkins_proxy（admin）', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: """$cmd_exe""", execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: env.project, remoteDirectorySDF: false, removePrefix: 'target/', sourceFiles: source_Files)], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
                     }
                 }
             }
