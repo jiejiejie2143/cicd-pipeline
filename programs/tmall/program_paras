@@ -1,4 +1,4 @@
 #ml-auth
 ml-auth_program=http://10.9.52.243:8088/cloud/ml-auth.git
-ml-auth_appinfo='target/ml-auth.war'
+ml-auth_appinfo=war
 

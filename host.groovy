@@ -47,9 +47,15 @@ pipeline {
                         echo env.appinfo
                         echo env.apollo
                         echo env.addr
-                        def source_Files = 'target/'+env.app_name+'.'+env.appinfo
+                        if (env.appinfo == 'war') {
+                            source_Files = 'target/'+env.app_name+'.war'
+                        } else if (env.appinfo == 'jar')  {
+                            source_Files = 'target/'+env.app_name+'.jar'
+                        } else {
+                            error env.appinfo+'项目参数错误，请检查打包的语言类型'
+                        }
                         echo source_Files
-                        sshPublisher(publishers: [sshPublisherDesc(configName: '114.55.42.166--jenkins_proxy（admin）', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '''ls /data''', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: env.project, remoteDirectorySDF: false, removePrefix: 'target/', sourceFiles: env.appinfo)], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
+                        sshPublisher(publishers: [sshPublisherDesc(configName: '114.55.42.166--jenkins_proxy（admin）', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '''ls /data''', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: env.project, remoteDirectorySDF: false, removePrefix: 'target/', sourceFiles: source_Files)], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
                     }
                 }
             }
