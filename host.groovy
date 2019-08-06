@@ -13,7 +13,6 @@ pipeline {
                     sh 'mkdir -pv '+env.ci_dir
                     
                     def git_repository = sh returnStdout: true, script: 'cat programs/'+env.project+'/program_paras|grep '+env.app_name+'_program|awk -F "=" \'{print $2}\''
-
                     def git_branch = env.branch
                     
                     dir(env.ci_dir) {
@@ -41,7 +40,7 @@ pipeline {
             steps {
                 script {
                     dir(env.ci_dir) {
-                        echo "文件传输至跳板机"
+                        echo "文件传输至跳板机"+env.branch
                         def env_appinfo = sh returnStdout: true, script: 'cat ../programs/'+env.project+'/program_paras|grep '+env.app_name+'_appinfo|awk -F "=" \'{print $2}\''
                         def env_apollo = sh returnStdout: true, script: 'cat ../programs/'+env.project+'/'+env.appenv+'_paras|grep '+env.app_name+'_apollo|awk -F "&" \'{print $2}\''
                         def env_addr = sh returnStdout: true, script: 'cat ../programs/'+env.project+'/'+env.appenv+'_paras|grep '+env.app_name+'_addr|awk -F "=" \'{print $2}\''
