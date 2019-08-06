@@ -42,11 +42,13 @@ pipeline {
         stage('远程部署') {
             steps {
                 script {
+                    dir(env.ci_dir) {
                         echo "文件传输至跳板机"
                         echo env.appinfo
                         echo env.apollo
                         echo env.addr
-                        sshPublisher(publishers: [sshPublisherDesc(configName: '114.55.42.166--jenkins_proxy（admin）', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '''ls /data''', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: env.project, remoteDirectorySDF: false, removePrefix: 'target/', sourceFiles: 'target/'+env.app_name+'.jar')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
+                        sshPublisher(publishers: [sshPublisherDesc(configName: '114.55.42.166--jenkins_proxy（admin）', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '''ls /data''', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: env.project, remoteDirectorySDF: false, removePrefix: 'target/', sourceFiles: 'target/' + env.app_name + '.jar')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
+                    }
                 }
             }
         }
