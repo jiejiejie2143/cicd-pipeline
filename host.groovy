@@ -10,6 +10,7 @@ pipeline {
                     env.branch = env.JOB_BASE_NAME.tokenize('+')[2]
                     env.appenv = env.JOB_BASE_NAME.tokenize('+')[3]
                     env.ci_dir =  env.app_name+'-ci'
+                    env.work_dir = env.ci_dir+'/'+env.app_name
                     sh 'mkdir -pv '+env.ci_dir
                     
                     def git_repository = sh returnStdout: true, script: 'cat programs/'+env.project+'/program_paras|grep '+env.app_name+'_program|awk -F "=" \'{print $2}\''
@@ -36,7 +37,7 @@ pipeline {
             }
             steps {
                 script {
-                    dir(env.ci_dir) {
+                    dir(env.work_dir) {
                         echo "开始maven构建"
                         if (env.appinfo == 'jar'||env.appinfo == 'war')  {
                             sh 'mvn clean install -DskipTests'
@@ -52,15 +53,14 @@ pipeline {
         stage('远程部署') {
             steps {
                 script {
-                    dir(env.ci_dir) {
+                    dir(env.work_dir) {
                         echo "文件传输至跳板机"
                         echo env.appinfo
                         echo env.apollo
                         echo env.addr
                         source_Files = 'target/'+env.app_name+'.'+env.appinfo
                         echo source_Files
-                        def cmd_exe = '''ls /data
-ls /data/jenkins'''
+                        def cmd_exe = 'ls /data'
                         sshPublisher(publishers: [sshPublisherDesc(configName: '114.55.42.166--jenkins_proxy（admin）', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: """$cmd_exe""", execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: env.project, remoteDirectorySDF: false, removePrefix: 'target/', sourceFiles: source_Files)], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
                     }
                 }
