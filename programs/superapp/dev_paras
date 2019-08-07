@@ -1,0 +1,5 @@
+#ml-auth
+superapp-service-device_apollo&-Denv=FAT
+superapp-service-device_addr=192.168.1.10 192.168.1.11 192.168.1.12
+superapp-service-device_start=1
+superapp-service-device_mem='-Xmx512m -Xms512m -Xmn256m'
