@@ -1,3 +1,5 @@
+import org.apache.groovy.json.internal.Exceptions
+
 //获取配置文件里自定义的参数的方法，programs_paras里的配置，需加两个参数，第一个为参数关键词，第二个为文件名；环境配置文件里的配置，只写一个参数关键词即可
 //参数以应用指定参数优先使用，如果没有指定参数，则使用公共参数
 def getParas(keyword,keyenv = env.appenv) {
@@ -69,7 +71,9 @@ pipeline {
 
                         if (env.app_name.contains('facade')||env.app_name.contains('common'))  {
                             sh 'mvn clean install deploy'
-                            System.exit(0)
+                            if (1==1){
+                                throw new Exceptions("自定义中断");
+                            }
                         } else {
                             sh 'mvn clean install -DskipTests'
                         }
