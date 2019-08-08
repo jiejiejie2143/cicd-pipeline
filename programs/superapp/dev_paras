@@ -1,5 +1,7 @@
-#ml-auth
-superapp-service-device_apollo&-Denv=FAT
+#用项目名为前缀命名的参数为项目共用参数
+
+#用应用名命名的参数为应用指定参数
+superapp-service-device_apollo=FAT
 superapp-service-device_addr=172.16.20.157
 superapp-service-device_start=1
 superapp-service-device_mem='-Xmx256m -Xms256m -Xmn128m'

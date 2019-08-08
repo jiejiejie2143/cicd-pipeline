@@ -1,4 +1,4 @@
-def getParas(keyword,keyenv = 'program') {
+def getParas(keyword,keyenv = env.appenv) {
     self_paras = sh returnStdout: true, script: 'cat programs/' + env.project + '/'+keyenv+'_paras|grep ' + env.app_name + '_' + keyword + '|awk -F "=" \'{print $2}\''
     self_paras = self_paras.tokenize('\n')[0]
     common_paras = sh returnStdout: true, script: 'cat programs/' + env.project + '/'+keyenv+'_paras|grep ' + env.project + '_' + keyword + '|awk -F "=" \'{print $2}\''
@@ -26,9 +26,9 @@ pipeline {
                     def git_repository = sh returnStdout: true, script: 'cat programs/'+env.project+'/program_paras|grep '+env.app_name+'_program|awk -F "=" \'{print $2}\''
                     def git_branch = env.branch
 
-                    env.appinfo = getParas('appinfo')
+                    env.appinfo = getParas('appinfo'，'program')
                     echo env.appinfo
-                    env.apollo = getParas('apollo',env.appenv)
+                    env.apollo = getParas('apollo')
                     echo env.apollo
 //                    env.appinfo = sh returnStdout: true, script: 'cat programs/'+env.project+'/program_paras|grep '+env.app_name+'_appinfo|awk -F "=" \'{print $2}\''
 //                    env.appinfo = env.appinfo.tokenize('\n')[0]
