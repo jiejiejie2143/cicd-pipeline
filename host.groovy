@@ -3,16 +3,12 @@
 def getParas(keyword,keyenv = env.appenv) {
     self_paras = sh returnStdout: true, script: 'cat programs/' + env.project + '/'+keyenv+'_paras|grep ' + env.app_name + '_' + keyword + '|awk -F "=" \'{print $2}\''
     self_paras = self_paras.tokenize('\n')[0]
-    echo 'self_paras:'+self_paras
     common_paras = sh returnStdout: true, script: 'cat programs/' + env.project + '/'+keyenv+'_paras|grep ' + env.project + '_' + keyword + '|awk -F "=" \'{print $2}\''
     common_paras = common_paras.tokenize('\n')[0]
-    echo 'common_paras:'+common_paras
     if (self_paras == null )  {
         paras = common_paras
-        echo 'is null:'+paras
     } else {
         paras = self_paras
-        echo 'no null:'+paras
     }
     return paras
 }
