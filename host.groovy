@@ -28,7 +28,7 @@ pipeline {
 
                     //获取项目自定义参数值
                     def git_repository = getParas('program','program')
-                    echo '获取gitlab地址为：'git_repository
+                    echo '获取gitlab地址为：'+git_repository
                     echo '分支为：'+env.branch
                     env.appinfo = getParas('appinfo','program')
                     echo '应用类型为：'+env.appinfo
