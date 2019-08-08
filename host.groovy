@@ -1,14 +1,14 @@
 //获取配置文件里自定义的参数的方法，programs_paras里的配置，需加两个参数，第一个为参数关键词，第二个为文件名；环境配置文件里的配置，只写一个参数关键词即可
 //参数以应用指定参数优先使用，如果没有指定参数，则使用公共参数
 def getParas(keyword,keyenv = env.appenv) {
-    self_paras = sh returnStdout: false, script: 'cat programs/' + env.project + '/'+keyenv+'_paras|grep ' + env.app_name + '_' + keyword + '|awk -F "=" \'{print $2}\''
-    self_paras = self_paras.tokenize('\n')[0]
-    common_paras = sh returnStdout: false, script: 'cat programs/' + env.project + '/'+keyenv+'_paras|grep ' + env.project + '_' + keyword + '|awk -F "=" \'{print $2}\''
-    common_paras = common_paras.tokenize('\n')[0]
-    if (self_paras != 'null')  {
-        paras = self_paras
+    self_paras = sh returnStdout: true, script: 'cat programs/' + env.project + '/'+keyenv+'_paras|grep ' + env.app_name + '_' + keyword + '|awk -F "=" \'{print $2}\''
+    self_paras2 = self_paras.tokenize('\n')[0]
+    common_paras = sh returnStdout: true, script: 'cat programs/' + env.project + '/'+keyenv+'_paras|grep ' + env.project + '_' + keyword + '|awk -F "=" \'{print $2}\''
+    common_paras2 = common_paras.tokenize('\n')[0]
+    if (self_paras2 != 'null')  {
+        paras = self_paras2
     } else {
-        paras = common_paras
+        paras = common_paras2
     }
     return paras
 }
