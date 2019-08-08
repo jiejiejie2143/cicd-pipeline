@@ -49,6 +49,8 @@ pipeline {
                     echo '应用需要启动的个数为：' + env.start
                     env.mem = getParas('mem')
                     echo '应用启动所需的内存为：' + env.mem
+                    env.rele = getParas('rele', 'program')
+                    echo '该项目关联的下游项目为：' + env.rele
 
                     dir(env.ci_dir) {
                         echo "开始拉取git代码"
@@ -80,7 +82,7 @@ pipeline {
                 script {
                     if (env.app_name.contains('facade') || env.app_name.contains('common')) {
                         echo "该项目不需要远程部署"
-                        build 'superapp+superapp-service-device+develop+dev'
+                        build env.rele
                     } else {
                         echo "继续远程部署流程"
 //                        dir(env.work_dir) {
