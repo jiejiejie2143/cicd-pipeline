@@ -1,4 +1,8 @@
-#ml-auth
+#common
+superapp_program=http://gitlab.mymlsoft.com:8088/cloud/superapp.git
+#appinfo可选参数，jar/war/deploy
+superapp_appinfo=jar
+
 superapp-service-device_program=http://gitlab.mymlsoft.com:8088/cloud/superapp.git
 #appinfo可选参数，jar/war/deploy
 superapp-service-device_appinfo=jar

@@ -31,6 +31,12 @@ pipeline {
 
                     echo "appinfo_common:"+env.appinfo_common
                     echo "appinfo:"+env.appinfo
+                    if (env.appinfo == 'null')  {
+                        env.appinfo = env.appinfo_common
+                        echo "now appinfo:"+env.appinfo
+                        } else {
+                            echo '取得appinfo参数：'+env.appinfo
+                        }
 //                    dir(env.ci_dir) {
 //                        echo "开始拉取git代码"
 //                        checkout([$class: 'GitSCM', branches: [[name: git_branch]], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'CleanBeforeCheckout']], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'bdf54155-8605-461e-891c-6eabacf536b8', url: git_repository]]])
