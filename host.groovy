@@ -1,7 +1,15 @@
 def getParas(keyword) {
-    common = sh returnStdout: true, script: 'cat programs/' + env.project + '/program_paras|grep ' + env.app_name + '_' + keyword + '|awk -F "=" \'{print $2}\''
-    common = common.tokenize('\n')[0]
-    return common
+    self_paras = sh returnStdout: true, script: 'cat programs/' + env.project + '/program_paras|grep ' + env.app_name + '_' + keyword + '|awk -F "=" \'{print $2}\''
+    self_paras = self_paras.tokenize('\n')[0]
+    common_paras = sh returnStdout: true, script: 'cat programs/' + env.project + '/program_paras|grep ' + env.project + '_' + keyword + '|awk -F "=" \'{print $2}\''
+    common_paras = common_paras.tokenize('\n')[0]
+    if (self_paras == 'null')  {
+        self_paras = common_paras
+        echo "没有设置"+keyword+"参数，使用公共参数:"+self_paras
+    } else {
+        echo "取得"+keyword+"参数："+self_paras
+    }
+    return self_paras
 }
 pipeline {
     agent any
@@ -23,27 +31,27 @@ pipeline {
 
                     env.appinfo = getParas('appinfo')
                     echo env.appinfo
-                    env.appinfo_common = sh returnStdout: true, script: 'cat programs/'+env.project+'/program_paras|grep '+env.project+'_appinfo|awk -F "=" \'{print $2}\''
-                    env.appinfo_common = env.appinfo_common.tokenize('\n')[0]
+                    env.apollo = getParas('apollo')
+                    echo env.apollo
 //                    env.appinfo = sh returnStdout: true, script: 'cat programs/'+env.project+'/program_paras|grep '+env.app_name+'_appinfo|awk -F "=" \'{print $2}\''
 //                    env.appinfo = env.appinfo.tokenize('\n')[0]
-                    env.apollo = sh returnStdout: true, script: 'cat programs/'+env.project+'/'+env.appenv+'_paras|grep '+env.app_name+'_apollo|awk -F "&" \'{print $2}\''
-                    env.apollo = env.apollo.tokenize('\n')[0]
-                    env.addr = sh returnStdout: true, script: 'cat programs/'+env.project+'/'+env.appenv+'_paras|grep '+env.app_name+'_addr|awk -F "=" \'{print $2}\''
-                    env.addr = env.addr.tokenize('\n')[0]
-                    env.start = sh returnStdout: true, script: 'cat programs/'+env.project+'/'+env.appenv+'_paras|grep '+env.app_name+'_start|awk -F "=" \'{print $2}\''
-                    env.start = env.start.tokenize('\n')[0]
-                    env.mem = sh returnStdout: true, script: 'cat programs/'+env.project+'/'+env.appenv+'_paras|grep '+env.app_name+'_mem|awk -F "=" \'{print $2}\''
-                    env.mem = env.mem.tokenize('\n')[0]
+//                    env.apollo = sh returnStdout: true, script: 'cat programs/'+env.project+'/'+env.appenv+'_paras|grep '+env.app_name+'_apollo|awk -F "&" \'{print $2}\''
+//                    env.apollo = env.apollo.tokenize('\n')[0]
+//                    env.addr = sh returnStdout: true, script: 'cat programs/'+env.project+'/'+env.appenv+'_paras|grep '+env.app_name+'_addr|awk -F "=" \'{print $2}\''
+//                    env.addr = env.addr.tokenize('\n')[0]
+//                    env.start = sh returnStdout: true, script: 'cat programs/'+env.project+'/'+env.appenv+'_paras|grep '+env.app_name+'_start|awk -F "=" \'{print $2}\''
+//                    env.start = env.start.tokenize('\n')[0]
+//                    env.mem = sh returnStdout: true, script: 'cat programs/'+env.project+'/'+env.appenv+'_paras|grep '+env.app_name+'_mem|awk -F "=" \'{print $2}\''
+//                    env.mem = env.mem.tokenize('\n')[0]
 
-                    echo "appinfo_common:"+env.appinfo_common
-                    echo "appinfo:"+env.appinfo
-                    if (env.appinfo == 'null')  {
-                        env.appinfo = env.appinfo_common
-                        echo "没有设置appinfo参数，使用公共参数:"+env.appinfo
-                        } else {
-                            echo '取得appinfo参数：'+env.appinfo
-                        }
+//                    echo "appinfo_common:"+env.appinfo_common
+//                    echo "appinfo:"+env.appinfo
+//                    if (env.appinfo == 'null')  {
+//                        env.appinfo = env.appinfo_common
+//                        echo "没有设置appinfo参数，使用公共参数:"+env.appinfo
+//                        } else {
+//                            echo '取得appinfo参数：'+env.appinfo
+//                        }
 //                    dir(env.ci_dir) {
 //                        echo "开始拉取git代码"
 //                        checkout([$class: 'GitSCM', branches: [[name: git_branch]], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'CleanBeforeCheckout']], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'bdf54155-8605-461e-891c-6eabacf536b8', url: git_repository]]])
