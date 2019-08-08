@@ -5,11 +5,11 @@ def getParas(keyword,keyenv = env.appenv) {
     self_paras = self_paras.tokenize('\n')[0]
     common_paras = sh returnStdout: true, script: 'cat programs/' + env.project + '/'+keyenv+'_paras|grep ' + env.project + '_' + keyword + '|awk -F "=" \'{print $2}\''
     common_paras = common_paras.tokenize('\n')[0]
-    if (self_paras != 'null' && common_paras != 'null')  {
+    if ((self_paras != 'null') && (common_paras != 'null'))  {
         paras = self_paras
-    } else if (self_paras == 'null' && common_paras != 'null') {
+    } else if ((self_paras == 'null') && (common_paras != 'null')) {
         paras = common_paras
-    } else if (self_paras != 'null' && common_paras == 'null'){
+    } else if ((self_paras != 'null') && (common_paras == 'null')) {
         paras = self_paras
     } else {
         paras = self_paras
