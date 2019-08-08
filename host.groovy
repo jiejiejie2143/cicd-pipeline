@@ -69,11 +69,10 @@ pipeline {
 
                         if (env.app_name.contains('facade')||env.app_name.contains('common'))  {
                             sh 'mvn clean install deploy'
-                            return
+                            System.exit(0)
                         } else {
                             sh 'mvn clean install -DskipTests'
                         }
-
                     }
                 }
             }
