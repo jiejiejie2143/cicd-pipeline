@@ -22,14 +22,22 @@ pipeline {
                     env.ci_dir =  env.app_name+'-ci'
                     env.work_dir = env.ci_dir+'/'+env.app_name
                     sh 'mkdir -pv '+env.ci_dir
-                    
-                    def git_repository = sh returnStdout: true, script: 'cat programs/'+env.project+'/program_paras|grep '+env.app_name+'_program|awk -F "=" \'{print $2}\''
+
+                    def git_repository = getParas('program','program')
+                    echo git_repository
+//                    def git_repository = sh returnStdout: true, script: 'cat programs/'+env.project+'/program_paras|grep '+env.app_name+'_program|awk -F "=" \'{print $2}\''
                     def git_branch = env.branch
 
-                    env.appinfo = getParas('appinfo'，'program')
+                    env.appinfo = getParas('appinfo','program')
                     echo env.appinfo
                     env.apollo = getParas('apollo')
                     echo env.apollo
+                    env.addr = getParas('addr')
+                    echo env.addr
+                    env.start = getParas('start')
+                    echo env.start
+                    env.mem = getParas('mem')
+                    echo env.mem
 //                    env.appinfo = sh returnStdout: true, script: 'cat programs/'+env.project+'/program_paras|grep '+env.app_name+'_appinfo|awk -F "=" \'{print $2}\''
 //                    env.appinfo = env.appinfo.tokenize('\n')[0]
 //                    env.apollo = sh returnStdout: true, script: 'cat programs/'+env.project+'/'+env.appenv+'_paras|grep '+env.app_name+'_apollo|awk -F "&" \'{print $2}\''
