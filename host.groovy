@@ -33,7 +33,7 @@ pipeline {
                     echo "appinfo:"+env.appinfo
                     if (env.appinfo == 'null')  {
                         env.appinfo = env.appinfo_common
-                        echo "now appinfo:"+env.appinfo
+                        echo "没有设置appinfo参数，使用公共参数:"+env.appinfo
                         } else {
                             echo '取得appinfo参数： '+env.appinfo
                         }
