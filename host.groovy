@@ -6,8 +6,8 @@ def getParas(keyword) {
     if (self_paras == 'null')  {
         self_paras = common_paras
         echo "没有设置"+keyword+"参数，使用公共参数:"+self_paras
-    } else {
-        echo "取得"+keyword+"参数："+self_paras
+    } else if (self_paras == 'null' && common_paras == 'null') {
+        error echo "请设置${keyword}参数，当前值为错误"
     }
     return self_paras
 }
