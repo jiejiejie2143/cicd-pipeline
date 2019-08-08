@@ -16,7 +16,7 @@ pipeline {
                     def git_repository = sh returnStdout: true, script: 'cat programs/'+env.project+'/program_paras|grep '+env.app_name+'_program|awk -F "=" \'{print $2}\''
                     def git_branch = env.branch
 
-                    env.appinfo_common = sh returnStdout: true, script: 'cat programs/'+env.project+'/program_paras|grep '+env.app_name+'_appinfo|awk -F "=" \'{print $2}\''
+                    env.appinfo_common = sh returnStdout: true, script: 'cat programs/'+env.project+'/program_paras|grep '+env.app_name+'_'+env.project+'|awk -F "=" \'{print $2}\''
                     env.appinfo_common = env.appinfo_common.tokenize('\n')[0]
                     env.appinfo = sh returnStdout: true, script: 'cat programs/'+env.project+'/program_paras|grep '+env.app_name+'_appinfo|awk -F "=" \'{print $2}\''
                     env.appinfo = env.appinfo.tokenize('\n')[0]
