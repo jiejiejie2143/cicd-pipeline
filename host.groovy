@@ -1,9 +1,14 @@
 pipeline {
     agent any
-    
+
     stages {
         stage('拉取gitlab代码') {
             steps {
+                def getParas(keyword) {
+                common = sh returnStdout: true, script: 'cat programs/'+env.project+'/program_paras|grep '+env.app_name+'_'+keyword+'|awk -F "=" \'{print $2}\''
+                common = common.tokenize('\n')[0]
+                return common
+            }
                 script {
                     env.project = env.JOB_BASE_NAME.tokenize('+')[0]
                     env.app_name = env.JOB_BASE_NAME.tokenize('+')[1]
@@ -15,12 +20,6 @@ pipeline {
                     
                     def git_repository = sh returnStdout: true, script: 'cat programs/'+env.project+'/program_paras|grep '+env.app_name+'_program|awk -F "=" \'{print $2}\''
                     def git_branch = env.branch
-
-                    def getParas() {
-                        def common = sh returnStdout: true, script: 'cat programs/'+env.project+'/program_paras|grep '+env.app_name+'_'+keyword+'|awk -F "=" \'{print $2}\''
-                        def common = common.tokenize('\n')[0]
-                        return common
-                    }
 
                     echo getParas(appinfo)
                     env.appinfo_common = sh returnStdout: true, script: 'cat programs/'+env.project+'/program_paras|grep '+env.project+'_appinfo|awk -F "=" \'{print $2}\''
