@@ -75,6 +75,8 @@ pipeline {
                     }
                 }
             }
+        }
+        stage('远程部署') {
             steps {
                 script {
                     echo "结束maven构建"
