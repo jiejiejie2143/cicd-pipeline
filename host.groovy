@@ -31,6 +31,13 @@ pipeline {
                     env.appinfo = getParas('appinfo','program')
                     echo env.appinfo
                     env.apollo = getParas('apollo')
+                    if (env.appinfo == 'jar') {
+                        env.apollo = '-Denv='+env.apollo
+                    } else if (env.appinfo == 'war') {
+                        env.apollo = 'env='+env.apollo
+                    } else {
+                        echo '其他类型，apollo参数不做处理'
+                    }
                     echo env.apollo
                     env.addr = getParas('addr')
                     echo env.addr
