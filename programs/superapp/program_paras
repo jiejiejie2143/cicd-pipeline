@@ -1,10 +1,10 @@
 #用项目名为前缀命名的参数为项目共用参数
 superapp_program=http://gitlab.mymlsoft.com:8088/cloud/superapp.git
-#appinfo可选参数，jar/war/deploy
+#appinfo可选参数，jar/war
 superapp_appinfo=jar
 
 #用应用名命名的参数为应用指定参数
-superapp-service-device_program=http://gitlab.mymlsoft.com:8088/cloud/superapp.git
-#appinfo可选参数，jar/war/deploy
-superapp-service-device_appinfo=jar
 
+#appinfo可选参数，jar/war
+saboss_appinfo=war
+sasever_appinfo=war

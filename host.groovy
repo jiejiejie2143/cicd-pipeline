@@ -11,7 +11,6 @@ def getParas(keyword,keyenv = env.appenv) {
     } else {
         return common_paras
     }
-
 }
 pipeline {
     agent any
@@ -70,9 +69,11 @@ pipeline {
 
                         if (env.app_name.contains('facade')||env.app_name.contains('common'))  {
                             sh 'mvn clean install deploy'
+                            return
                         } else {
                             sh 'mvn clean install -DskipTests'
                         }
+                        echo "结束maven构建"
                     }
                 }
             }
