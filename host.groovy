@@ -1,7 +1,7 @@
-def getParas(keyword) {
-    self_paras = sh returnStdout: true, script: 'cat programs/' + env.project + '/program_paras|grep ' + env.app_name + '_' + keyword + '|awk -F "=" \'{print $2}\''
+def getParas(keyword,keyenv = 'program') {
+    self_paras = sh returnStdout: true, script: 'cat programs/' + env.project + '/'+keyenv+'_paras|grep ' + env.app_name + '_' + keyword + '|awk -F "=" \'{print $2}\''
     self_paras = self_paras.tokenize('\n')[0]
-    common_paras = sh returnStdout: true, script: 'cat programs/' + env.project + '/program_paras|grep ' + env.project + '_' + keyword + '|awk -F "=" \'{print $2}\''
+    common_paras = sh returnStdout: true, script: 'cat programs/' + env.project + '/'+keyenv+'_paras|grep ' + env.project + '_' + keyword + '|awk -F "=" \'{print $2}\''
     common_paras = common_paras.tokenize('\n')[0]
     if (self_paras == 'null')  {
         self_paras = common_paras
@@ -28,7 +28,7 @@ pipeline {
 
                     env.appinfo = getParas('appinfo')
                     echo env.appinfo
-                    env.apollo = getParas('apollo')
+                    env.apollo = getParas('apollo',env.appenv)
                     echo env.apollo
 //                    env.appinfo = sh returnStdout: true, script: 'cat programs/'+env.project+'/program_paras|grep '+env.app_name+'_appinfo|awk -F "=" \'{print $2}\''
 //                    env.appinfo = env.appinfo.tokenize('\n')[0]
