@@ -6,10 +6,11 @@ def getParas(keyword,keyenv = env.appenv) {
     common_paras = sh returnStdout: true, script: 'cat programs/' + env.project + '/'+keyenv+'_paras|grep ' + env.project + '_' + keyword + '|awk -F "=" \'{print $2}\''
     common_paras = common_paras.tokenize('\n')[0]
     if (self_paras == 'null')  {
-        return common_paras
+        paras = common_paras
     } else {
-        return self_paras
+        paras = self_paras
     }
+    return paras
 }
 pipeline {
     agent any
@@ -31,9 +32,9 @@ pipeline {
                     def git_repository = getParas('program', 'program')
                     echo '获取gitlab地址为：' + git_repository
                     echo '分支为：' + env.branch
-                    def env.appinfo = getParas('appinfo', 'program')
+                    env.appinfo = getParas('appinfo', 'program')
                     echo '应用类型为：' + env.appinfo
-                    def env.apollo = getParas('apollo')
+                    env.apollo = getParas('apollo')
                     if (env.appinfo == 'jar') {
                         env.apollo = '-Denv=' + env.apollo
                     } else if (env.appinfo == 'war') {
@@ -42,13 +43,13 @@ pipeline {
                         echo '其他类型，apollo参数不做处理'
                     }
                     echo 'apollp环境为：' + env.apollo
-                    def env.addr = getParas('addr')
+                    env.addr = getParas('addr')
                     echo '需要部署的IP为：' + env.addr
-                    def env.start = getParas('start')
+                    env.start = getParas('start')
                     echo '应用需要启动的个数为：' + env.start
-                    def env.mem = getParas('mem')
+                    env.mem = getParas('mem')
                     echo '应用启动所需的内存为：' + env.mem
-                    def env.rele = getParas('rele', 'program')
+                    env.rele = getParas('rele', 'program')
                     echo '该项目关联的下游项目为：' + env.rele
 
                     dir(env.ci_dir) {
