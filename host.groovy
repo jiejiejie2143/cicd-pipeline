@@ -68,9 +68,13 @@ pipeline {
                     echo "开始maven构建"
 
                     if (env.app_name.contains('facade')||env.app_name.contains('common'))  {
-                        sh 'mvn clean install deploy'
-                        if (1==1){
-                            exit;
+                        try {
+                            sh 'mvn clean install deploy'
+                            sh 'exit 1'
+                        }
+                        catch (exc) {
+                            echo 'Something failed, I should sound the klaxons!'
+                            throw exc
                         }
                     } else {
                         sh 'mvn clean install -DskipTests'
