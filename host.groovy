@@ -22,7 +22,7 @@ pipeline {
                         return common
                     }
 
-                    env.appinfo = getparas(appinfo)
+                    echo getparas(appinfo)
                     env.appinfo_common = sh returnStdout: true, script: 'cat programs/'+env.project+'/program_paras|grep '+env.project+'_appinfo|awk -F "=" \'{print $2}\''
                     env.appinfo_common = env.appinfo_common.tokenize('\n')[0]
 //                    env.appinfo = sh returnStdout: true, script: 'cat programs/'+env.project+'/program_paras|grep '+env.app_name+'_appinfo|awk -F "=" \'{print $2}\''
