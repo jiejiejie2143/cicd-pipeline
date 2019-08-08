@@ -35,7 +35,7 @@ pipeline {
                         env.appinfo = env.appinfo_common
                         echo "now appinfo:"+env.appinfo
                         } else {
-                            echo '取得appinfo参数：'+env.appinfo
+                            echo '取得appinfo参数： '+env.appinfo
                         }
 //                    dir(env.ci_dir) {
 //                        echo "开始拉取git代码"
