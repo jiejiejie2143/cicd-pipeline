@@ -68,7 +68,7 @@ pipeline {
                         echo "开始maven构建"
                         if (env.app_name.contains('facade') || env.app_name.contains('common')) {
                             sh 'mvn clean install deploy'
-                            return
+                            env.mvn=1
                         } else {
                             sh 'mvn clean install -DskipTests'
                         }
@@ -79,7 +79,12 @@ pipeline {
         stage('远程部署') {
             steps {
                 script {
-                    echo "结束maven构建"
+                    if (env.mvn=1) {
+                        echo "该项目不需要远程部署"
+                    } else {
+                        echo "继续远程部署流程"
+                    }
+
 //                    dir(env.work_dir) {
 //                        echo "文件传输至跳板机"
 //                        echo env.appinfo
