@@ -2,13 +2,13 @@
 //参数以应用指定参数优先使用，如果没有指定参数，则使用公共参数
 def getParas(keyword,keyenv = env.appenv) {
     self_paras = sh returnStdout: true, script: 'cat programs/' + env.project + '/'+keyenv+'_paras|grep ' + env.app_name + '_' + keyword + '|awk -F "=" \'{print $2}\''
-    self_paras2 = self_paras.tokenize('\n')[0]
+    //self_paras2 = self_paras.tokenize('\n')[0]
     common_paras = sh returnStdout: true, script: 'cat programs/' + env.project + '/'+keyenv+'_paras|grep ' + env.project + '_' + keyword + '|awk -F "=" \'{print $2}\''
-    common_paras2 = common_paras.tokenize('\n')[0]
-    if (self_paras2 != 'null')  {
-        paras = self_paras2
+    //common_paras2 = common_paras.tokenize('\n')[0]
+    if (self_paras != 'null')  {
+        paras = self_paras
     } else {
-        paras = common_paras2
+        paras = common_paras
     }
     return paras
 }
