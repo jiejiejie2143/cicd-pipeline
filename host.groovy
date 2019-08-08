@@ -31,7 +31,7 @@ pipeline {
 
                     echo "appinfo_common:"+env.appinfo_common
                     echo "appinfo:"+env.appinfo
-                    if (env.appinfo == 'null')  {
+                    if (env.appinfo == null)  {
                         env.appinfo = env.appinfo_common
                         echo "now appinfo:"+env.appinfo
                         } else {
