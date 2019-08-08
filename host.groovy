@@ -10,7 +10,7 @@ def getParas(keyword,keyenv = env.appenv) {
 //    } else {
 //        paras = self_paras
 //    }
-    return self_paras
+    return common_paras
 }
 pipeline {
     agent any
