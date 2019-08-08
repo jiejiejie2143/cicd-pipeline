@@ -29,9 +29,9 @@ pipeline {
                     //获取项目自定义参数值
                     def git_repository = getParas('program','program')
                     echo '获取gitlab地址为：'git_repository
-                    echo '分支为：'env.branch
+                    echo '分支为：'+env.branch
                     env.appinfo = getParas('appinfo','program')
-                    echo '应用类型为：'env.appinfo
+                    echo '应用类型为：'+env.appinfo
                     env.apollo = getParas('apollo')
                     if (env.appinfo == 'jar') {
                         env.apollo = '-Denv='+env.apollo
@@ -40,13 +40,13 @@ pipeline {
                     } else {
                         echo '其他类型，apollo参数不做处理'
                     }
-                    echo 'apollp环境为：'env.apollo
+                    echo 'apollp环境为：'+env.apollo
                     env.addr = getParas('addr')
-                    echo '需要部署的IP为：'env.addr
+                    echo '需要部署的IP为：'+env.addr
                     env.start = getParas('start')
-                    echo '应用需要启动的个数为：'env.start
+                    echo '应用需要启动的个数为：'+env.start
                     env.mem = getParas('mem')
-                    echo '应用启动所需的内存为：'env.mem
+                    echo '应用启动所需的内存为：'+env.mem
 
                     dir(env.ci_dir) {
                         echo "开始拉取git代码"
