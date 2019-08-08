@@ -16,13 +16,13 @@ pipeline {
                     def git_repository = sh returnStdout: true, script: 'cat programs/'+env.project+'/program_paras|grep '+env.app_name+'_program|awk -F "=" \'{print $2}\''
                     def git_branch = env.branch
 
-                    static String getparas(String keyword) {
+                    def getParas() {
                         def common = sh returnStdout: true, script: 'cat programs/'+env.project+'/program_paras|grep '+env.app_name+'_'+keyword+'|awk -F "=" \'{print $2}\''
                         def common = common.tokenize('\n')[0]
                         return common
                     }
 
-                    echo getparas(appinfo)
+                    echo getParas(appinfo)
                     env.appinfo_common = sh returnStdout: true, script: 'cat programs/'+env.project+'/program_paras|grep '+env.project+'_appinfo|awk -F "=" \'{print $2}\''
                     env.appinfo_common = env.appinfo_common.tokenize('\n')[0]
 //                    env.appinfo = sh returnStdout: true, script: 'cat programs/'+env.project+'/program_paras|grep '+env.app_name+'_appinfo|awk -F "=" \'{print $2}\''
@@ -42,7 +42,7 @@ pipeline {
                         env.appinfo = env.appinfo_common
                         echo "没有设置appinfo参数，使用公共参数:"+env.appinfo
                         } else {
-                            echo '取得appinfo参数： '+env.appinfo
+                            echo '取得appinfo参数：'+env.appinfo
                         }
 //                    dir(env.ci_dir) {
 //                        echo "开始拉取git代码"
