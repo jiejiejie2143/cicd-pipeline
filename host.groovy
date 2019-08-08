@@ -16,7 +16,7 @@ pipeline {
                     def git_repository = sh returnStdout: true, script: 'cat programs/'+env.project+'/program_paras|grep '+env.app_name+'_program|awk -F "=" \'{print $2}\''
                     def git_branch = env.branch
 
-                    def getparas(keyword) {
+                    static String getparas(String keyword) {
                         def common = sh returnStdout: true, script: 'cat programs/'+env.project+'/program_paras|grep '+env.app_name+'_'+keyword+'|awk -F "=" \'{print $2}\''
                         def common = common.tokenize('\n')[0]
                         return common
