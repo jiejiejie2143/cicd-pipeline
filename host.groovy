@@ -73,14 +73,15 @@ pipeline {
                         } else {
                             sh 'mvn clean install -DskipTests'
                         }
-                        echo "结束maven构建"
+
                     }
                 }
             }
         }
-//        stage('远程部署') {
-//            steps {
-//                script {
+        stage('远程部署') {
+            steps {
+                script {
+                    echo "结束maven构建"
 //                    dir(env.work_dir) {
 //                        echo "文件传输至跳板机"
 //                        echo env.appinfo
@@ -95,8 +96,8 @@ pipeline {
 //                        echo cmd_exe
 //                        sshPublisher(publishers: [sshPublisherDesc(configName: '114.55.42.166--jenkins_proxy（admin）', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: """ls /data""", execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: remote_Dir, remoteDirectorySDF: false, removePrefix: 'target/', sourceFiles: source_Files)], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
 //                    }
-//                }
-//            }
-//        }
+                }
+            }
+        }
     }
 }
