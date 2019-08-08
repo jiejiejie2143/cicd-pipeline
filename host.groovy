@@ -6,10 +6,8 @@ def getParas(keyword,keyenv = env.appenv) {
     common_paras = sh returnStdout: true, script: 'cat programs/' + env.project + '/'+keyenv+'_paras|grep ' + env.project + '_' + keyword + '|awk -F "=" \'{print $2}\''
     common_paras = common_paras.tokenize('\n')[0]
     if (self_paras == 'null')  {
-        self_paras = common_paras
-        return self_paras
+        return common_paras
     } else {
-        self_paras = self_paras
         return self_paras
     }
 }
