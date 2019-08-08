@@ -4,12 +4,8 @@ pipeline {
     stages {
         stage('拉取gitlab代码') {
             steps {
-                def getParas(keyword) {
-                common = sh returnStdout: true, script: 'cat programs/'+env.project+'/program_paras|grep '+env.app_name+'_'+keyword+'|awk -F "=" \'{print $2}\''
-                common = common.tokenize('\n')[0]
-                return common
-            }
                 script {
+
                     env.project = env.JOB_BASE_NAME.tokenize('+')[0]
                     env.app_name = env.JOB_BASE_NAME.tokenize('+')[1]
                     env.branch = env.JOB_BASE_NAME.tokenize('+')[2]
