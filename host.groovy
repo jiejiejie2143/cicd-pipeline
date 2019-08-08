@@ -1,3 +1,5 @@
+//获取配置文件里自定义的参数的方法，programs_paras里的配置，需加两个参数，第一个为参数关键词，第二个为文件名；环境配置文件里的配置，只写一个参数关键词即可
+//参数以应用指定参数优先使用，如果没有指定参数，则使用公共参数
 def getParas(keyword,keyenv = env.appenv) {
     self_paras = sh returnStdout: true, script: 'cat programs/' + env.project + '/'+keyenv+'_paras|grep ' + env.app_name + '_' + keyword + '|awk -F "=" \'{print $2}\''
     self_paras = self_paras.tokenize('\n')[0]
@@ -15,6 +17,7 @@ pipeline {
         stage('拉取gitlab代码') {
             steps {
                 script {
+                    //分割项目名作为参数
                     env.project = env.JOB_BASE_NAME.tokenize('+')[0]
                     env.app_name = env.JOB_BASE_NAME.tokenize('+')[1]
                     env.branch = env.JOB_BASE_NAME.tokenize('+')[2]
@@ -23,12 +26,12 @@ pipeline {
                     env.work_dir = env.ci_dir+'/'+env.app_name
                     sh 'mkdir -pv '+env.ci_dir
 
+                    //获取项目自定义参数值
                     def git_repository = getParas('program','program')
-                    echo git_repository
-                    //def git_branch = env.branch
-
+                    echo '获取gitlab地址为：'git_repository
+                    echo '分支为：'env.branch
                     env.appinfo = getParas('appinfo','program')
-                    echo env.appinfo
+                    echo '应用类型为：'env.appinfo
                     env.apollo = getParas('apollo')
                     if (env.appinfo == 'jar') {
                         env.apollo = '-Denv='+env.apollo
@@ -37,13 +40,13 @@ pipeline {
                     } else {
                         echo '其他类型，apollo参数不做处理'
                     }
-                    echo env.apollo
+                    echo 'apollp环境为：'env.apollo
                     env.addr = getParas('addr')
-                    echo env.addr
+                    echo '需要部署的IP为：'env.addr
                     env.start = getParas('start')
-                    echo env.start
+                    echo '应用需要启动的个数为：'env.start
                     env.mem = getParas('mem')
-                    echo env.mem
+                    echo '应用启动所需的内存为：'env.mem
 
                     dir(env.ci_dir) {
                         echo "开始拉取git代码"
