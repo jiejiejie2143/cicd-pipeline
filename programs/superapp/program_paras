@@ -6,5 +6,5 @@ superapp_appinfo=jar
 #用应用名命名的参数为应用指定参数
 superapp-service-device_program=http://gitlab.mymlsoft.com:8088/cloud/superapp.git
 #appinfo可选参数，jar/war/deploy
-superapp-service-device_appinfo=war
+superapp-service-device_appinfo=jar
 
