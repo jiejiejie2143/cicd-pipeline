@@ -55,26 +55,25 @@ pipeline {
                 }
             }
         }
-//        stage('maven构建') {
-//            tools {
-//                maven 'maven3.0.5'
-//                jdk 'jdk8'
-//            }
-//            steps {
-//                script {
-//                    dir(env.work_dir) {
-//                        echo "开始maven构建"
-//                        if (env.appinfo == 'jar'||env.appinfo == 'war')  {
-//                            sh 'mvn clean install -DskipTests'
-//                        } else if (env.appinfo == 'deploy')  {
-//                            sh 'clean install deploy'
-//                        } else {
-//                            error env.appinfo+'类型参数错误，请检查打包的语言类型'
-//                        }
-//                    }
-//                }
-//            }
-//        }
+        stage('maven构建') {
+            tools {
+                maven 'maven3.0.5'
+                jdk 'jdk8'
+            }
+            steps {
+                script {
+                    dir(env.work_dir) {
+                        echo "开始maven构建"
+
+                        if (env.app_name.contains('facade'))  {
+                            sh 'clean install deploy'
+                        } else {
+                            sh 'mvn clean install -DskipTests'
+                        }
+                    }
+                }
+            }
+        }
 //        stage('远程部署') {
 //            steps {
 //                script {
