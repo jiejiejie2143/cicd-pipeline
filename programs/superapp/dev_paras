@@ -1,4 +1,8 @@
 #用项目名为前缀命名的参数为项目共用参数
+superapp_apollo=FAT
+superapp_addr=172.16.20.157
+superapp_start=1
+superapp_mem='-Xmx256m -Xms256m -Xmn128m'
 
 #用应用名命名的参数为应用指定参数
 superapp-service-device_apollo=FAT

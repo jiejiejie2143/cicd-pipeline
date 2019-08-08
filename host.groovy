@@ -69,7 +69,7 @@ pipeline {
                         echo "开始maven构建"
 
                         if (env.app_name.contains('facade')||env.app_name.contains('common'))  {
-                            sh 'clean install deploy'
+                            sh 'mvn clean install deploy'
                         } else {
                             sh 'mvn clean install -DskipTests'
                         }
