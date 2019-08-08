@@ -9,7 +9,7 @@ def getParas(keyword,keyenv = env.appenv) {
         self_paras = common_paras
         return self_paras
     } else {
-        return common_paras
+        return self_paras
     }
 }
 pipeline {
