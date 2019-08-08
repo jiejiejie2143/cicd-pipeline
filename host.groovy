@@ -7,14 +7,14 @@ def getParas(keyword,keyenv = env.appenv) {
     common_paras = common_paras.tokenize('\n')[0]
     if (self_paras != 'null' && common_paras != 'null')  {
         paras = self_paras
-        return paras
     } else if (self_paras == 'null' && common_paras != 'null') {
-        paras = self_paras
-        return paras
-    } else {
         paras = common_paras
-        return paras
+    } else if (self_paras != 'null' && common_paras == 'null'){
+        paras = self_paras
+    } else {
+        paras = self_paras
     }
+    return paras
 }
 pipeline {
     agent any
