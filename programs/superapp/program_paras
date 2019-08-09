@@ -9,5 +9,5 @@ superapp_pom=1
 
 #appinfo可选参数，jar/war
 saboss_appinfo=war
-sasever_appinfo=war
+saserver_appinfo=war
 
