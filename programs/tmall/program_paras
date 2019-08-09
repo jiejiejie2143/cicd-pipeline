@@ -2,4 +2,4 @@
 ml-auth_program=http://10.9.52.243:8088/cloud/ml-auth.git
 #appinfo可选参数，jar/war/deploy
 ml-auth_appinfo=war
-
+ml-auth_pom=0

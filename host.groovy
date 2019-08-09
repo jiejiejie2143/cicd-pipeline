@@ -25,7 +25,6 @@ pipeline {
                     env.branch = env.JOB_BASE_NAME.tokenize('+')[2]
                     env.appenv = env.JOB_BASE_NAME.tokenize('+')[3]
                     env.ci_dir = env.app_name + '-ci'
-                    env.work_dir = env.ci_dir + '/' + env.app_name
                     sh 'mkdir -pv ' + env.ci_dir
 
                     //获取项目自定义参数值
@@ -51,6 +50,19 @@ pipeline {
                     echo '应用启动所需的内存为：' + env.mem
                     env.rele = getParas('rele')
                     echo '该项目关联的下游项目为：' + env.rele
+                    env.pom = getParas('pom', 'program')
+                    echo '该项目pom文件的层级为：' + env.pom
+
+                    //判断pom文件的目录层级，给与正确的工作路径
+                    if (env.pom == 0) {
+                        env.work_dir = env.ci_dir
+                    } else if ( env.pom == 1 ) {
+                        env.work_dir = env.ci_dir + '/' + env.app_name
+                    } else if ( env.pom == 2 ) {
+                        env.work_dir = env.ci_dir + '/' + env.project + '/' + env.app_name
+                    } else {
+                        env.work_dir = env.ci_dir + '/' + env.app_name
+                    }
 
                     dir(env.ci_dir) {
                         echo "开始拉取git代码"
