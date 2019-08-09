@@ -9,4 +9,3 @@ superapp_appinfo=jar
 saboss_appinfo=war
 sasever_appinfo=war
 
-superapp-facade-device_rele=superapp+superapp-service-device+develop+dev

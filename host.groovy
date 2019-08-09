@@ -49,7 +49,7 @@ pipeline {
                     echo '应用需要启动的个数为：' + env.start
                     env.mem = getParas('mem')
                     echo '应用启动所需的内存为：' + env.mem
-                    env.rele = getParas('rele', 'program')
+                    env.rele = getParas('rele')
                     echo '该项目关联的下游项目为：' + env.rele
 
                     dir(env.ci_dir) {

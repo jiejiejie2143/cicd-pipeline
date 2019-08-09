@@ -9,3 +9,6 @@ superapp-service-device_apollo=FAT
 superapp-service-device_addr=172.16.20.157
 superapp-service-device_start=2
 superapp-service-device_mem='-Xmx256m -Xms256m -Xmn128m'
+
+#项目关联，多个项目关联请用英文逗号分隔
+superapp-facade-device_rele=superapp+superapp-service-device+develop+dev
