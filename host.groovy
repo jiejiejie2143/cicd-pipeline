@@ -54,11 +54,11 @@ pipeline {
                     echo '该项目pom文件的层级为：' + env.pom
 
                     //判断pom文件的目录层级，给与正确的工作路径
-                    if (env.pom == 0) {
+                    if (env.pom == '0') {
                         env.work_dir = env.ci_dir
-                    } else if ( env.pom == 1 ) {
+                    } else if ( env.pom == '1' ) {
                         env.work_dir = env.ci_dir + '/' + env.app_name
-                    } else if ( env.pom == 2 ) {
+                    } else if ( env.pom == '2' ) {
                         env.work_dir = env.ci_dir + '/' + env.project + '/' + env.app_name
                     } else {
                         env.work_dir = env.ci_dir + '/' + env.app_name
