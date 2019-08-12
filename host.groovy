@@ -13,7 +13,7 @@ def getParas(keyword,keyenv = env.appenv) {
     return paras
 }
 pipeline {
-    agent agent-vpc
+    agent any
 
     stages {
         stage('拉取gitlab代码') {
@@ -75,6 +75,7 @@ pipeline {
             }
         }
         stage('maven构建') {
+            agent { node label {agent-vpc}}
             tools {
                 maven 'maven3.0.5'
                 jdk 'jdk8'
@@ -93,6 +94,7 @@ pipeline {
             }
         }
         stage('远程部署') {
+            agent { node label {agent-vpc}}
             steps {
                 script {
                     if (env.app_name.contains('facade') || env.app_name.contains('common')) {
