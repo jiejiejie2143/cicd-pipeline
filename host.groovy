@@ -13,7 +13,7 @@ def getParas(keyword,keyenv = env.appenv) {
     return paras
 }
 pipeline {
-    agent any
+    agent agent-vpc
 
     stages {
         stage('拉取gitlab代码') {
