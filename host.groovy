@@ -13,10 +13,11 @@ def getParas(keyword,keyenv = env.appenv) {
     return paras
 }
 pipeline {
-    agent any
+    agent none
 
     stages {
         stage('拉取gitlab代码') {
+            agent { node label {master}}
             steps {
                 script {
                     //分割项目名作为参数
