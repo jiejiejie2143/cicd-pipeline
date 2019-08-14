@@ -40,10 +40,13 @@ pipeline {
                     //判断pom文件的目录层级，给与正确的工作路径
                     if (env.pom == '0') {
                         env.work_dir = env.ci_dir
+                        env.dot = '../'
                     } else if ( env.pom == '1' ) {
                         env.work_dir = env.ci_dir + '/' + env.app_name
+                        env.dot = '../../'
                     } else if ( env.pom == '2' ) {
                         env.work_dir = env.ci_dir + '/' + env.project + '/' + env.app_name
+                        env.dot = '../../../'
                     } else {
                         env.work_dir = env.ci_dir + '/' + env.app_name
                     }
@@ -74,7 +77,7 @@ pipeline {
                 script {
                     dir(env.work_dir) {
                         echo "开始docker打包"
-                        sh 'bash ../init.sh'+' '+env.appinfo+' '+env.app_name
+                        sh 'bash '+env.dot+'init.sh'+' '+env.appinfo+' '+env.app_name
                         sh 'docker build -t registry-vpc.cn-hangzhou.aliyuncs.com/ml_test/'+env.app_name+':'+env.BUILD_NUMBER+' .'
                     }
                 }
