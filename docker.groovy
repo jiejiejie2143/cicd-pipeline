@@ -34,18 +34,6 @@ pipeline {
                     echo '分支为：' + env.branch
                     env.appinfo = getParas('appinfo', 'program')
                     echo '应用类型为：' + env.appinfo
-                    env.apollo = getParas('apollo')
-
-                    //处理apollo参数，因为参数中有等号，取值会出错，需要进行二次处理
-                    if (env.appinfo == 'jar') {
-                        env.apollo = '-Denv=' + env.apollo
-                    } else if (env.appinfo == 'war') {
-                        env.apollo = 'env=' + env.apollo
-                    } else {
-                        echo '其他类型，apollo参数不做处理'
-                    }
-
-                    echo 'apollp环境为：' + env.apollo
                     env.pom = getParas('pom', 'program')
                     echo '该项目pom文件的层级为：' + env.pom
 
