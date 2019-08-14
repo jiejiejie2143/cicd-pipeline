@@ -24,8 +24,8 @@ pipeline {
         }
         stage('maven构建') {
             tools {
-                maven 'maven3.6.1'
-                jdk 'jdk8_161'
+                maven 'maven3.0.5'
+                jdk 'jdk8'
             }
             steps {
                 script {
@@ -42,7 +42,7 @@ pipeline {
                     dir(env.ci_dir) {
                         echo "开始docker打包"
                         sh 'bash ../init.sh'+' '+env.appinfo+' '+env.app_name
-                        sh 'docker build -t registry.cn-hangzhou.aliyuncs.com/ml_test/'+env.app_name+':'+env.BUILD_NUMBER+' .'
+                        sh 'docker build -t registry-vpc.cn-hangzhou.aliyuncs.com/ml_test/'+env.app_name+':'+env.BUILD_NUMBER+' .'
                     }
                 }
             }
@@ -52,8 +52,8 @@ pipeline {
                 script {
                     dir(env.ci_dir) {
                         echo "镜像推送至阿里云仓库"
-                        sh 'docker login registry.cn-hangzhou.aliyuncs.com'
-                        sh 'docker push registry.cn-hangzhou.aliyuncs.com/ml_test/'+env.app_name+':'+env.BUILD_NUMBER
+                        sh 'docker login registry-vpc.cn-hangzhou.aliyuncs.com'
+                        sh 'docker push registry-vpc.cn-hangzhou.aliyuncs.com/ml_test/'+env.app_name+':'+env.BUILD_NUMBER
                     }
                 }
             }
@@ -63,7 +63,7 @@ pipeline {
                 script {
                     dir(env.ci_dir) {
                         echo "镜像部署至k8s"
-                        sh 'docker rmi registry.cn-hangzhou.aliyuncs.com/ml_test/'+env.app_name+':'+env.BUILD_NUMBER
+                        sh 'docker rmi registry-vpc.cn-hangzhou.aliyuncs.com/ml_test/'+env.app_name+':'+env.BUILD_NUMBER
                     }
                 }
             }

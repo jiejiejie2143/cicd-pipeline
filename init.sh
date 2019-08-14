@@ -5,11 +5,11 @@ if [ $1 == 'jar' ]
     echo 'jar'
     cat > startup.sh <<EOF
 #!/bin/bash
-java -jar -Dforce-dev=true /data/apps/${2}.jar
+java -jar ${APLO_ENV} /data/apps/${2}.jar
 tail -f /dev/null
 EOF
     cat > Dockerfile <<EOF
-FROM registry.cn-hangzhou.aliyuncs.com/ml_test/centos_jdk:1.0
+FROM registry-vpc.cn-hangzhou.aliyuncs.com/ml_test/centos_jdk:1.0
 COPY target/${2}.jar /data/apps/${2}.jar
 COPY startup.sh /data/startup.sh
 CMD ["/bin/bash /data/startup.sh"]
@@ -20,11 +20,14 @@ elif [ $1 == 'war' ]
     echo 'war'
     cat > startup.sh <<EOF
 #!/bin/bash
+mkdir -p /opt/settings
+touch /opt/settings/server.properties
+echo "env=${APLO_ENV}" > /opt/settings/server.properties
 /bin/bash /data/tomcat8/bin/startup.sh
 tail -f /dev/null
 EOF
     cat > Dockerfile <<EOF
-FROM registry.cn-hangzhou.aliyuncs.com/ml_test/centos_jdk:1.0
+FROM registry-vpc.cn-hangzhou.aliyuncs.com/ml_test/centos_jdk:1.0
 COPY target/${2}.war /data/tomcat8/webapps/${2}.war
 COPY startup.sh /data/startup.sh
 CMD ["/bin/bash /data/startup.sh"]
