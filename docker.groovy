@@ -17,7 +17,7 @@ pipeline {
                     
                     dir(env.ci_dir) {
                         echo "开始拉取git代码"
-                        checkout([$class: 'GitSCM', branches: [[name: git_branch]], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'CleanBeforeCheckout']], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'yanjie', url: git_repository]]])                      
+                        checkout([$class: 'GitSCM', branches: [[name: git_branch]], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'CleanBeforeCheckout']], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'gitlab', url: git_repository]]])
                     }
                 }
             }
