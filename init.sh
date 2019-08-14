@@ -12,7 +12,7 @@ EOF
 FROM registry-vpc.cn-hangzhou.aliyuncs.com/ml_test/centos_jdk:1.0
 COPY target/${2}.jar /data/apps/${2}.jar
 COPY startup.sh /data/startup.sh
-CMD ["/bin/bash /data/startup.sh"]
+CMD ["/data/startup.sh"]
 EOF
     chmod +x startup.sh
 elif [ $1 == 'war' ]
@@ -30,7 +30,7 @@ EOF
 FROM registry-vpc.cn-hangzhou.aliyuncs.com/ml_test/centos_jdk:1.0
 COPY target/${2}.war /data/tomcat8/webapps/${2}.war
 COPY startup.sh /data/startup.sh
-CMD ["/bin/bash /data/startup.sh"]
+CMD ["/data/startup.sh"]
 EOF
     chmod +x startup.sh
 else
