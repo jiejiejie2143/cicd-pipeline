@@ -5,7 +5,7 @@ if [ $1 == 'jar' ]
     echo 'jar'
     cat > startup.sh <<EOF
 #!/bin/bash
-java -jar '${APLO_ENV}' /data/apps/${2}.jar
+java -jar \$APLO_ENV /data/apps/${2}.jar
 tail -f /dev/null
 EOF
     cat > Dockerfile <<EOF
@@ -22,7 +22,7 @@ elif [ $1 == 'war' ]
 #!/bin/bash
 mkdir -p /opt/settings
 touch /opt/settings/server.properties
-echo 'env=${APLO_ENV}' > /opt/settings/server.properties
+echo "env=\$APLO_ENV" > /opt/settings/server.properties
 /bin/bash /data/tomcat8/bin/startup.sh
 tail -f /dev/null
 EOF
