@@ -51,6 +51,11 @@ pipeline {
                         env.work_dir = env.ci_dir + '/' + env.app_name
                     }
 
+                    env.registry = 'registry-vpc.cn-hangzhou.aliyuncs.com/ml_'+env.appenv+'/'
+                    echo '本次拟推送的仓库为：' + env.registry
+                    env.tag = env.registry+env.app_name+':'+env.BUILD_NUMBER
+                    echo '本次拟打包的镜像名为：' + env.tag
+
                     dir(env.ci_dir) {
                         echo "开始拉取git代码"
                         checkout([$class: 'GitSCM', branches: [[name: env.branch]], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'CleanBeforeCheckout']], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'gitlab', url: git_repository]]])
@@ -78,7 +83,7 @@ pipeline {
                     dir(env.work_dir) {
                         echo "开始docker打包"
                         sh 'bash '+env.dot+'init.sh'+' '+env.appinfo+' '+env.app_name
-                        sh 'docker build -t registry-vpc.cn-hangzhou.aliyuncs.com/ml_test/'+env.app_name+':'+env.BUILD_NUMBER+' .'
+                        sh 'docker build -t '+env.tag+' .'
                     }
                 }
             }
@@ -89,7 +94,7 @@ pipeline {
                     dir(env.work_dir) {
                         echo "镜像推送至阿里云仓库"
                         sh 'docker login registry-vpc.cn-hangzhou.aliyuncs.com'
-                        sh 'docker push registry-vpc.cn-hangzhou.aliyuncs.com/ml_test/'+env.app_name+':'+env.BUILD_NUMBER
+                        sh 'docker push '+env.tag
                     }
                 }
             }
@@ -99,7 +104,8 @@ pipeline {
                 script {
                     dir(env.work_dir) {
                         echo "镜像部署至k8s"
-                        sh 'docker rmi registry-vpc.cn-hangzhou.aliyuncs.com/ml_test/'+env.app_name+':'+env.BUILD_NUMBER
+                        sh 'docker rmi '+env.tag
+                        sh 'kubectl --kubeconfig=/opt/k8s_config/'+env.appenv+' -n '+env.appenv+' set image deployment/'+env.app_name+' '+env.app_name+'='+env.tag
                     }
                 }
             }
