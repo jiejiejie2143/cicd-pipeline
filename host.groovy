@@ -40,6 +40,8 @@ pipeline {
                         env.apollo = '-Denv=' + env.apollo
                     } else if (env.appinfo == 'war') {
                         env.apollo = 'env=' + env.apollo
+                        env.tomcat = getParas('tomcat', 'program')
+                        echo '该项目tomcat的目录为：' + env.tomcat
                     } else {
                         echo '其他类型，apollo参数不做处理'
                     }
@@ -107,10 +109,19 @@ pipeline {
                         echo env.addr
                         remote_Dir = env.appenv+'/'+env.project+'/'+env.app_name
                         source_Files = 'target/'+env.app_name+'.'+env.appinfo+',target/lib/*.jar'
-                        jenkins_path = '/data/jenkins/jenkins_common_jar.sh'
-                        des_path = '/data/'+env.project+'/'+env.app_name
+                        jenkins_path = '/data/jenkins/jenkins_common_'+env.appinfo+'.sh'
                         file_path = '/data/jenkins/'+remote_Dir
-                        def cmd_exe = jenkins_path+' '+env.start+' '+env.apollo+' '+des_path+' '+env.app_name+' '+env.mem+' '+file_path+' '+env.addr
+                        //根据jar和war不同的类型生成不同的参数
+                        if (env.appinfo == 'jar') {
+                            des_path = '/data/'+env.project+'/'+env.app_name
+                            cmd_exe = jenkins_path+' '+env.start+' '+env.apollo+' '+des_path+' '+env.app_name+' '+env.mem+' '+file_path+' '+env.addr
+                        } else if (env.appinfo == 'war') {
+                            des_path = '/data/'+env.project+'/'+env.tomcat
+                            cmd_exe = jenkins_path+' '+env.apollo+' '+des_path+' '+env.app_name+' '+file_path+' '+env.addr
+                        } else {
+                            error '其他类型，不能进行部署'
+                        }
+
                         echo cmd_exe
                         sshPublisher(publishers: [sshPublisherDesc(configName: '114.55.42.166--jenkins_proxy（admin）', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: """$cmd_exe""", execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: remote_Dir, remoteDirectorySDF: false, removePrefix: 'target/', sourceFiles: source_Files)], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
                         }
