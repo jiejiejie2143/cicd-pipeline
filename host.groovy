@@ -119,7 +119,7 @@ pipeline {
                             des_path = '/data/'+env.project+'/'+env.tomcat
                             cmd_exe = jenkins_path+' '+env.apollo+' '+des_path+' '+env.app_name+' '+file_path+' '+env.addr
                         } else {
-                            error '其他类型，不能进行部署'
+                            error env.appinfo+'其他类型，不能进行部署'
                         }
 
                         echo cmd_exe
