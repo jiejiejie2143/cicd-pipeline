@@ -92,31 +92,31 @@ pipeline {
                 }
             }
         }
-//        stage('远程部署') {
-//            steps {
-//                script {
-//                    if (env.app_name.contains('facade') || env.app_name.contains('common')) {
-//                        echo "该项目不需要远程部署"
-//                        build env.rele
-//                    } else {
-//                        echo "继续远程部署流程"
-//                        dir(env.work_dir) {
-//                        echo "文件传输至跳板机"
-//                        echo env.appinfo
-//                        echo env.apollo
-//                        echo env.addr
-//                        remote_Dir = env.appenv+'/'+env.project+'/'+env.app_name
-//                        source_Files = 'target/'+env.app_name+'.'+env.appinfo+',target/lib/*.jar'
-//                        jenkins_path = '/data/jenkins/jenkins_common_jar.sh'
-//                        des_path = '/data/'+env.project+'/'+env.app_name
-//                        file_path = '/data/jenkins/'+remote_Dir
-//                        def cmd_exe = jenkins_path+' '+env.start+' '+env.apollo+' '+des_path+' '+env.app_name+' '+env.mem+' '+file_path+' '+env.addr
-//                        echo cmd_exe
-//                        sshPublisher(publishers: [sshPublisherDesc(configName: '114.55.42.166--jenkins_proxy（admin）', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: """ls /data""", execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: remote_Dir, remoteDirectorySDF: false, removePrefix: 'target/', sourceFiles: source_Files)], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
-//                        }
-//                    }
-//                }
-//            }
-//        }
+        stage('远程部署') {
+            steps {
+                script {
+                    if (env.app_name.contains('facade') || env.app_name.contains('common')) {
+                        echo "该项目不需要远程部署"
+                        build env.rele
+                    } else {
+                        echo "继续远程部署流程"
+                        dir(env.work_dir) {
+                        echo "文件传输至跳板机"
+                        echo env.appinfo
+                        echo env.apollo
+                        echo env.addr
+                        remote_Dir = env.appenv+'/'+env.project+'/'+env.app_name
+                        source_Files = 'target/'+env.app_name+'.'+env.appinfo+',target/lib/*.jar'
+                        jenkins_path = '/data/jenkins/jenkins_common_jar.sh'
+                        des_path = '/data/'+env.project+'/'+env.app_name
+                        file_path = '/data/jenkins/'+remote_Dir
+                        def cmd_exe = jenkins_path+' '+env.start+' '+env.apollo+' '+des_path+' '+env.app_name+' '+env.mem+' '+file_path+' '+env.addr
+                        echo cmd_exe
+                        sshPublisher(publishers: [sshPublisherDesc(configName: '114.55.42.166--jenkins_proxy（admin）', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: """$cmd_exe""", execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: remote_Dir, remoteDirectorySDF: false, removePrefix: 'target/', sourceFiles: source_Files)], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
+                        }
+                    }
+                }
+            }
+        }
     }
 }
