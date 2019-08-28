@@ -105,7 +105,7 @@ pipeline {
                     dir(env.work_dir) {
                         echo "镜像部署至k8s"
                         sh 'docker rmi '+env.tag
-                        sh 'kubectl --kubeconfig=/opt/k8s_config/'+env.appenv+' -n '+env.appenv+' set image deployment/'+env.app_name+' '+env.app_name+'='+env.tag
+                        sh 'kubectl --kubeconfig=/opt/k8s_config/'+env.appenv+' -n '+env.appenv+' set image deployment/'+env.project+' '+env.app_name+'='+env.tag
                     }
                 }
             }
