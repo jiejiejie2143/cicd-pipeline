@@ -82,33 +82,33 @@ pipeline {
                 script {
                     dir(env.work_dir) {
                         echo "开始docker打包"
-                        sh 'bash '+env.dot+'init.sh'+' '+env.appinfo+' '+env.app_name
-                        sh 'docker build -t '+env.tag+' .'
+                        sh "bash ${dot}init.sh ${appinfo} ${app_name}"
+                        sh "docker build -t $tag ."
                     }
                 }
             }
         }
-        stage('推送仓库') {
-            steps {
-                script {
-                    dir(env.work_dir) {
-                        echo "镜像推送至阿里云仓库"
-                        sh 'docker login registry-vpc.cn-hangzhou.aliyuncs.com'
-                        sh 'docker push '+env.tag
-                    }
-                }
-            }
-        }
-        stage('镜像部署') {
-            steps {
-                script {
-                    dir(env.work_dir) {
-                        echo "镜像部署至k8s"
-                        sh 'docker rmi '+env.tag
-                        sh 'kubectl --kubeconfig=/opt/k8s_config/'+env.appenv+' -n '+env.appenv+' set image deployment/'+env.app_name+' '+env.app_name+'='+env.tag
-                    }
-                }
-            }
-        }
+//        stage('推送仓库') {
+//            steps {
+//                script {
+//                    dir(env.work_dir) {
+//                        echo "镜像推送至阿里云仓库"
+//                        sh 'docker login registry-vpc.cn-hangzhou.aliyuncs.com'
+//                        sh 'docker push '+env.tag
+//                    }
+//                }
+//            }
+//        }
+//        stage('镜像部署') {
+//            steps {
+//                script {
+//                    dir(env.work_dir) {
+//                        echo "镜像部署至k8s"
+//                        sh 'docker rmi '+env.tag
+//                        sh 'kubectl --kubeconfig=/opt/k8s_config/'+env.appenv+' -n '+env.appenv+' set image deployment/'+env.app_name+' '+env.app_name+'='+env.tag
+//                    }
+//                }
+//            }
+//        }
     }
 }
