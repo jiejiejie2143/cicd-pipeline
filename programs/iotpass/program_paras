@@ -5,6 +5,8 @@ microservice-mcontrol-core_program=http://ngrok.local.mymlsoft.com:1111/cloud/me
 microservice-gateway-core_program=http://ngrok.local.mymlsoft.com:1111/cloud/meiling-microservice-gateway.git
 microservice-sleepac-core_program=http://ngrok.local.mymlsoft.com:1111/cloud/meiling-microservice-sleepac.git
 
+iotpass_k8sconfig=prod
+
 #appinfo可选参数，jar/war
 iotpass_appinfo=jar
 #pom文件层级

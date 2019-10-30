@@ -36,6 +36,8 @@ pipeline {
                     echo '应用类型为：' + env.appinfo
                     env.pom = getParas('pom', 'program')
                     echo '该项目pom文件的层级为：' + env.pom
+                    env.k8sconfig = getParas('k8sconfig', 'program')
+                    echo '该项目所在集群的key为：' + env.k8sconfig
 
                     //判断pom文件的目录层级，给与正确的工作路径
                     if (env.pom == '0') {
@@ -105,7 +107,7 @@ pipeline {
                     dir(env.work_dir) {
                         echo "镜像部署至k8s"
                         sh 'docker rmi '+env.tag
-                        sh 'kubectl --kubeconfig=/opt/k8s_config/'+env.appenv+' -n '+env.appenv+' set image deployment/'+env.app_name+' '+env.app_name+'='+env.tag
+                        sh 'kubectl --kubeconfig=/opt/k8s_config/'+env.k8sconfig+' -n '+env.project+' set image deployment/'+env.app_name+' '+env.app_name+'='+env.tag
                     }
                 }
             }
