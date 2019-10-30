@@ -1,0 +1,14 @@
+#用项目名为前缀命名的参数为项目共用参数
+microservice-iotpass-core_program=http://ngrok.local.mymlsoft.com:1111/cloud/meiling-microservice-iotpaas.git
+microservice-oauth2-core_program=http://ngrok.local.mymlsoft.com:1111/cloud/meiling-microservice-oauth2.git
+microservice-mcontrol-core_program=http://ngrok.local.mymlsoft.com:1111/cloud/meiling-microservice-mcontrol.git
+microservice-gateway-core_program=http://ngrok.local.mymlsoft.com:1111/cloud/meiling-microservice-gateway.git
+
+#appinfo可选参数，jar/war
+iotpass_appinfo=jar
+#pom文件层级
+iotpass_pom=1
+
+#用应用名命名的参数为应用指定参数
+
+
