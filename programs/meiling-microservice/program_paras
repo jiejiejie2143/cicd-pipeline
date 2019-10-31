@@ -1,0 +1,15 @@
+#用项目名为前缀命名的参数为项目共用参数
+microservice-gateway-core_program=http://ngrok.local.mymlsoft.com:1111/cloud/meiling-microservice-gateway.git
+microservice-sleepac-core_program=http://ngrok.local.mymlsoft.com:1111/cloud/meiling-microservice-sleepac.git
+microservice-databoard-core_program=http://ngrok.local.mymlsoft.com:1111/cloud/meiling-microservice-databoard.git
+
+meiling-microservice_k8sconfig=prod
+
+#appinfo可选参数，jar/war
+meiling-microservice_appinfo=jar
+#pom文件层级
+meiling-microservice_pom=1
+
+#用应用名命名的参数为应用指定参数
+
+
