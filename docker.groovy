@@ -36,8 +36,11 @@ pipeline {
                     echo '应用类型为：' + env.appinfo
                     env.pom = getParas('pom', 'program')
                     echo '该项目pom文件的层级为：' + env.pom
-                    env.k8sconfig = getParas('k8sconfig', 'program')
+                    env.k8sconfig = getParas('k8sconfig')
                     echo '该项目所在集群的key为：' + env.k8sconfig
+                    env.registry_namespace = getParas('registry_namespace')
+                    echo '该项目部署的镜像仓库为：' + env.registry_namespace
+
 
                     //判断pom文件的目录层级，给与正确的工作路径
                     if (env.pom == '0') {
@@ -53,7 +56,7 @@ pipeline {
                         env.work_dir = env.ci_dir + '/' + env.app_name
                     }
 
-                    env.registry = 'registry-vpc.cn-hangzhou.aliyuncs.com/ml_'+env.appenv+'/'
+                    env.registry = 'registry-vpc.cn-hangzhou.aliyuncs.com/ml_'+env.registry_namespace+'/'
                     echo '本次拟推送的仓库为：' + env.registry
                     env.tag = env.registry+env.app_name+':'+env.BUILD_NUMBER
                     echo '本次拟打包的镜像名为：' + env.tag

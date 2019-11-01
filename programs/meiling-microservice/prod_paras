@@ -1,0 +1,2 @@
+meiling-microservice_k8sconfig=prod
+meiling-microservice_registry_namespace=prod
