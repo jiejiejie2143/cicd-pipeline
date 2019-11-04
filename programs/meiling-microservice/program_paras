@@ -2,6 +2,8 @@
 microservice-gateway-core_program=http://ngrok.local.mymlsoft.com:1111/cloud/meiling-microservice-gateway.git
 microservice-sleepac-core_program=http://ngrok.local.mymlsoft.com:1111/cloud/meiling-microservice-sleepac.git
 microservice-databoard-core_program=http://ngrok.local.mymlsoft.com:1111/cloud/meiling-microservice-databoard.git
+microservice-tsl-core_program=http://ngrok.local.mymlsoft.com:1111/cloud/meiling-microservice-tsl.git
+microservice-rdsetup-core_program=http://ngrok.local.mymlsoft.com:1111/cloud/meiling-microservice-rdsetup.git
 microservice-iotpass-core_program=http://ngrok.local.mymlsoft.com:1111/cloud/meiling-microservice-iotpaas.git
 microservice-oauth2-core_program=http://ngrok.local.mymlsoft.com:1111/cloud/meiling-microservice-oauth2.git
 microservice-mcontrol-core_program=http://ngrok.local.mymlsoft.com:1111/cloud/meiling-microservice-mcontrol.git
