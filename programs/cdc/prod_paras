@@ -1,0 +1,15 @@
+#用项目名为前缀命名的参数为项目共用参数
+cdc_apollo=='PRO'
+cdc_addr==172.16.10.20
+cdc_start==1
+cdc_mem=='-Xmx1G -Xms1G -Xmn512m'
+
+#用应用名命名的参数为应用指定参数
+
+
+#项目关联，多个项目关联请用英文逗号分隔
+cdc-common_rele==cdc-prod/cdc+cdc-facade-app+master+prod,cdc-prod/cdc+cdc-facade-cloud+master+prod,cdc-prod/cdc+cdc-facade-device+master+prod,cdc-prod/cdc+mqtt-push-facade+master+prod
+cdc-facade-app_rele==cdc-prod/cdc+cdc-service-app+master+prod
+cdc-facade-cloud_rele==cdc-prod/cdc+cdc-service-cloud+master+prod
+cdc-facade-device_rele==cdc-prod/cdc+cdc-service-device+master+prod
+mqtt-push-facade_rele==cdc-prod/cdc+mqtt-push-service+master+prod
