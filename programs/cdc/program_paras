@@ -9,6 +9,6 @@ cdc_pom==1
 
 #appinfo可选参数，jar/war
 cdc-whitegoods_appinfo==war
-cdc-whitegoods_tomcat==tomcat-cdc-whitegoods-8180,tomcat-cdc-whitegoods-8280,tomcat-cdc-whitegoods-8380
+cdc-whitegoods_tomcat==tomcat-cdc-whitegoods-8180,tomcat-cdc-whitegoods-8280,tomcat-cdc-whitegoods-8380,tomcat-cdc-whitegoods-8480
 
 
