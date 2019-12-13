@@ -1,6 +1,6 @@
 #用项目名为前缀命名的参数为项目共用参数
-cdc_apollo=='PRO'
-cdc_addr==172.16.10.20
+cdc_apollo==PRO
+cdc_addr==172.16.10.42
 cdc_start==1
 cdc_mem=='-Xmx1G -Xms1G -Xmn512m'
 

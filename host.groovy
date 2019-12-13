@@ -159,7 +159,7 @@ pipeline {
                                             removePrefix: 'target/', sourceFiles: source_Files)], usePromotionTimestamp: false,
                                     useWorkspaceInPromotion: false, verbose: false)])
                         } else if (env.appinfo == 'war') {
-                            for (TOMCAT in env.tomcat){
+                            for (TOMCAT in env.tomcat.tokenize(',')){
                                 echo "${TOMCAT}"
                                 des_path = "/data/${env.project}/${TOMCAT}"
                                 cmd_exe = "${jenkins_path} ${apollo} ${des_path} ${app_name} ${file_path} ${addr}"

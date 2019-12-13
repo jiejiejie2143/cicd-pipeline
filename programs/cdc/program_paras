@@ -1,0 +1,14 @@
+#用项目名为前缀命名的参数为项目共用参数
+cdc_program==http://gitlab.mymlsoft.com:8088/cloud/cdc-center.git
+#appinfo可选参数，jar/war
+cdc_appinfo==jar
+#pom文件层级
+cdc_pom==1
+
+#用应用名命名的参数为应用指定参数
+
+#appinfo可选参数，jar/war
+cdc-whitegoods_appinfo==war
+cdc-whitegoods_tomcat==tomcat-cdc-whitegoods-8180,tomcat-cdc-whitegoods-8280,tomcat-cdc-whitegoods-8380
+
+
