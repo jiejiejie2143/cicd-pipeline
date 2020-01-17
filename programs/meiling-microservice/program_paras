@@ -8,6 +8,7 @@ microservice-iotpass-core_program=http://ngrok.local.mymlsoft.com:1111/cloud/mei
 microservice-oauth2-core_program=http://ngrok.local.mymlsoft.com:1111/cloud/meiling-microservice-oauth2.git
 microservice-mcontrol-core_program=http://ngrok.local.mymlsoft.com:1111/cloud/meiling-microservice-mcontrol.git
 microservice-envdatafix-core_program=http://ngrok.local.mymlsoft.com:1111/cloud/meiling-microservice-envdatafix.git
+microservice-microservice-mcontrol_program=http://ngrok.local.mymlsoft.com:1111/cloud/meiling-microservice-mcontrol.git
 
 meiling-microservice_k8sconfig=prod
 
