@@ -8,7 +8,7 @@ cdc_mem=='-Xmx612m -Xms612m -Xmn256m'
 cdc-service-app_mem=='-Xmx1G -Xms1G -Xmn512m'
 mqtt-push-service_addr==172.16.10.20
 #项目关联，多个项目关联请用英文逗号分隔
-cdc-common_rele==cdc-prod-37/cdc+cdc-facade-app+master+prod,cdc-prod-37/cdc+cdc-facade-cloud+master+prod,cdc-prod-37/cdc+cdc-facade-device+master+prod,cdc-prod-37/cdc+mqtt-push-facade+master+prod
+cdc-common_rele==cdc-prod-37/cdc+cdc-facade-app+master+prod,cdc-prod-37/cdc+cdc-facade-cloud+master+prod,cdc-prod-37/cdc+cdc-facade-device+master+prod
 cdc-facade-app_rele==cdc-prod-37/cdc+cdc-service-app+master+prod
 cdc-facade-cloud_rele==cdc-prod-37/cdc+cdc-service-cloud+master+prod
 cdc-facade-device_rele==cdc-prod-37/cdc+cdc-service-device+master+prod
