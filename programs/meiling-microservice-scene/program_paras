@@ -1,12 +1,12 @@
 #用项目名为前缀命名的参数为项目共用参数
-meiling-microservice-scene_program==http://ngrok.local.mymlsoft.com:1111/cloud/meiling-microservice-scene.git
+meiling-microservice-scene_program=http://ngrok.local.mymlsoft.com:1111/cloud/meiling-microservice-scene.git
 
 
 #appinfo可选参数，jar/war
-meiling-microservice-scene_appinfo==jar
+meiling-microservice-scene_appinfo=jar
 
 #pom文件层级
-meiling-microservice-scene_pom==1
+meiling-microservice-scene_pom=1
 
 #用应用名命名的参数为应用指定参数
 
