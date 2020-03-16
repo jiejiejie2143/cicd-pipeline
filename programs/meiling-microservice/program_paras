@@ -10,6 +10,11 @@ microservice-mcontrol-core_program=http://ngrok.local.mymlsoft.com:1111/cloud/me
 microservice-envdatafix-core_program=http://ngrok.local.mymlsoft.com:1111/cloud/meiling-microservice-envdatafix.git
 microservice-rdsetup-core_program=http://ngrok.local.mymlsoft.com:1111/cloud/meiling-microservice-rdsetup.git
 
+microservice-scene-process_program=http://ngrok.local.mymlsoft.com:1111/cloud/meiling-microservice-scene.git
+microservice-scene-reader_program=http://ngrok.local.mymlsoft.com:1111/cloud/meiling-microservice-scene.git
+microservice-scene-touch_program=http://ngrok.local.mymlsoft.com:1111/cloud/meiling-microservice-scene.git
+microservice-scene-writer_program=http://ngrok.local.mymlsoft.com:1111/cloud/meiling-microservice-scene.git
+
 meiling-microservice_k8sconfig=prod
 
 #appinfo可选参数，jar/war
