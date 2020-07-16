@@ -1,0 +1,34 @@
+#用项目名为前缀命名的参数为项目共用参数
+superapp_apollo=='FAT -Didc=develop'
+superapp_addr==10.27.8.117
+superapp_start==1
+superapp_mem=='-Xmx128m -Xms128m -Xmn64m'
+
+#用应用名命名的参数为应用指定参数
+superapp-service-construction_mem=='-Xmx512m -Xms512m -Xmn256m  -javaagent:/agent/agent/skywalking-agent.jar -Dagent.service_name=superapp-service-construction'
+superapp-service-elecard_mem=='-Xmx512m -Xms512m -Xmn256m -javaagent:/agent/agent/skywalking-agent.jar=agent.service_name=superapp-service-elecard'
+superapp-service-banner_mem=='-Xmx512m -Xms512m -Xmn256m -javaagent:/agent/agent/skywalking-agent.jar=agent.service_name=superapp-service-banner'
+saserver_tomcat==tomcat-saserver-8181
+saboss_tomcat==tomcat-saboss-8280
+saboss_app_port==[8280]
+saserver_app_port==[8181]
+
+
+
+#项目关联，多个项目关联请用英文逗号分隔
+superapp-common_rele==superapp-test114+cdc-test118_dev/superapp+superapp-chiq3ac-facade+superapp_2019_09+test114,superapp-test114+cdc-test118_dev/superapp+superapp-facade-fileupload+superapp_2019_09+test114,superapp-test114+cdc-test118_dev/superapp+superapp-facade-banner+superapp_2019_09+test114,superapp-test114+cdc-test118_dev/superapp+superapp-facade-device+superapp_2019_09+test114,superapp-test114+cdc-test118_dev/superapp+superapp-facade-cache+superapp_2019_09+test114,superapp-test114+cdc-test118_dev/superapp+superapp-facade-core+superapp_2019_09+test114,superapp-test114+cdc-test118_dev/superapp+superapp-homeappliance-facade+superapp_2019_09+test114,superapp-test114+cdc-test118_dev/superapp+superapp-facade-construction+superapp_2019_09+test114,superapp-test114+cdc-test118_dev/superapp+superapp-facade-elecard+superapp_2019_09+test114,superapp-test114+cdc-test118_dev/superapp+superapp-facade-user+superapp_2019_09+test114,superapp-test114+cdc-test118_dev/superapp+superapp-facade-littlemultyjoin+superapp_2019_09+test114
+
+superapp-chiq3ac-facade_rele==superapp-test114+cdc-test118_dev/superapp+superapp-chiq3ac-service+superapp_2019_09+test114
+superapp-facade-fileupload_rele==superapp-test114+cdc-test118_dev/superapp+superapp-service-fileupload+superapp_2019_09+test114
+superapp-facade-banner_rele==superapp-test114+cdc-test118_dev/superapp+superapp-service-banner+superapp_2019_09+test114
+superapp-facade-device_rele==superapp-test114+cdc-test118_dev/superapp+superapp-service-device+superapp_2019_09+test114
+superapp-facade-cache_rele==superapp-test114+cdc-test118_dev/superapp+superapp-service-cache+superapp_2019_09+test114
+superapp-facade-core_rele==superapp-test114+cdc-test118_dev/superapp+superapp-service-core+superapp_2019_09+test114
+superapp-homeappliance-facade_rele==superapp-test114+cdc-test118_dev/superapp+superapp-homeappliance-service+superapp_2019_09+test114
+superapp-facade-construction_rele==superapp-test114+cdc-test118_dev/superapp+superapp-service-construction+superapp_2019_09+test114
+superapp-facade-elecard_rele==superapp-test114+cdc-test118_dev/superapp+superapp-service-elecard+superapp_2019_09+test114
+superapp-facade-user_rele==superapp-test114+cdc-test118_dev/superapp+superapp-service-user+superapp_2019_09+test114
+superapp-facade-littlemultyjoin_rele==superapp-test114+cdc-test118_dev/superapp+superapp-service-littlemultyjoin+superapp_2019_09+test114
+
+
+

@@ -1,4 +1,4 @@
-#用项目名为前缀命名的参数为项目共用参数
+#用项目名为前缀命名的参数为项目共用参数   start要启动多少个就写几
 cdc_apollo==PRO
 cdc_addr==172.16.10.37
 cdc_start==1
@@ -7,9 +7,14 @@ cdc_mem=='-Xmx612m -Xms612m -Xmn256m'
 #用应用名命名的参数为应用指定参数
 cdc-service-app_mem=='-Xmx1G -Xms1G -Xmn512m'
 mqtt-push-service_addr==172.16.10.20
+
+cdc-whitegoods_tomcat==tomcat-cdc-whitegoods-8180,tomcat-cdc-whitegoods-8280,tomcat-cdc-whitegoods-8380,tomcat-cdc-whitegoods-8480,tomcat-cdc-whitegoods-8580
+cdc-whitegoods_app_port==[8180,8280,8380,8480]
+
+
 #项目关联，多个项目关联请用英文逗号分隔
-cdc-common_rele==cdc-prod-37/cdc+cdc-facade-app+master+prod,cdc-prod-37/cdc+cdc-facade-cloud+master+prod,cdc-prod-37/cdc+cdc-facade-device+master+prod
-cdc-facade-app_rele==cdc-prod-37/cdc+cdc-service-app+master+prod
-cdc-facade-cloud_rele==cdc-prod-37/cdc+cdc-service-cloud+master+prod
-cdc-facade-device_rele==cdc-prod-37/cdc+cdc-service-device+master+prod
-mqtt-push-facade_rele==cdc-prod-37/cdc+mqtt-push-service+master+prod
+cdc-common_rele==cdc-prod/cdc+cdc-facade-app+master+prod,cdc-prod/cdc+cdc-facade-cloud+master+prod,cdc-prod/cdc+cdc-facade-device+master+prod,cdc-prod/cdc+mqtt-push-facade+master+prod
+cdc-facade-app_rele==cdc-prod/cdc+cdc-service-app+master+prod
+cdc-facade-cloud_rele==cdc-prod/cdc+cdc-service-cloud+master+prod
+cdc-facade-device_rele==cdc-prod/cdc+cdc-service-device+master+prod
+mqtt-push-facade_rele==cdc-prod/cdc+mqtt-push-service+master+prod

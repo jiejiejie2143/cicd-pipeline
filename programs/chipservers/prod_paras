@@ -1,0 +1,14 @@
+#用项目名为前缀命名的参数为项目共用参数
+chipservers_apollo==PRO
+chipservers_addr==172.16.118.57
+chipservers_start==1
+chipservers_mem=='-Xmx512m -Xms512m -Xmn256m'
+
+#用应用名命名的参数为应用指定参数
+chipserver_tomcat==tomcat-chipserver-9180
+chipboss_tomcat==tomcat-chipboss-9280
+chipserver_tomcat_port==[9180]
+chipboss_tomcat_port==[9280]
+
+#项目关联，多个项目关联请用英文逗号分隔
+chipserver-chips-facade_rele==chipservers-product/chipservers+chipserver-chips-service+master+product

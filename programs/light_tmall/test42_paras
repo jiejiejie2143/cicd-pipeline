@@ -1,0 +1,14 @@
+#用项目名为前缀命名的参数为项目共用参数
+light-tmall_apollo=='FAT -Didc=light'
+light-tmall_addr==172.16.10.42
+light-tmall_start==1
+light-tmall_mem=='-Xmx512m -Xms512m -Xmn256m'
+
+#用应用名命名的参数为应用指定参数
+light-tmall_tomcat==tomcat-light-tmall-8480
+light-tmall_port==[8480]
+#项目关联，多个项目关联请用英文逗号分隔
+
+
+
+

@@ -1,13 +1,14 @@
 #用项目名为前缀命名的参数为项目共用参数
-superapp_program=http://gitlab.mymlsoft.com:8088/cloud/superapp.git
+superapp_program==ssh://git@ngrok.local.mymlsoft.com:2222/cloud/superapp.git
 #appinfo可选参数，jar/war
-superapp_appinfo=jar
+superapp_appinfo==jar
 #pom文件层级
-superapp_pom=1
+superapp_pom==1
 
 #用应用名命名的参数为应用指定参数
 
 #appinfo可选参数，jar/war
-saboss_appinfo=war
-saserver_appinfo=war
+saboss_appinfo==war
+saserver_appinfo==war
+
 

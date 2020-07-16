@@ -1,0 +1,11 @@
+#用项目名为前缀命名的参数为项目共用参数
+xdboss_program==ssh://git@ngrok.local.mymlsoft.com:2222/cloud/xdboss.git
+xdboss_appinfo==war
+#pom文件层级
+xdboss_pom==0
+
+#用应用名命名的参数为应用指定参数
+
+#appinfo可选参数，jar/war
+xdboss_appinfo==war
+

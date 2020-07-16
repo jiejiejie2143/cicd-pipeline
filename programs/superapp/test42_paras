@@ -1,0 +1,31 @@
+#用项目名为前缀命名的参数为项目共用参数
+superapp_apollo=='FAT -Didc=light'
+superapp_addr==172.16.10.42
+superapp_start==1
+superapp_mem=='-Xmx256m -Xms256m -Xmn256m'
+
+#用应用名命名的参数为应用指定参数
+superapp-service-construction_mem=='-Xmx1024m -Xms1024m -Xmn256m'
+saserver_tomcat==tomcat-saserver-8180
+saboss_tomcat==tomcat-saboss-8280
+saboss_app_port==[8280]
+saserver_app_port==[8180]
+
+
+#项目关联，多个项目关联请用英文逗号分隔
+superapp-common_rele==QiJianGongSi_Master-test42/superapp+superapp-facade-device+QiJianGongSi_Master+test42/,QiJianGongSi_Master-test42/superapp+superapp-facade-cache+QiJianGongSi_Master+test42/,QiJianGongSi_Master-test42/superapp+superapp-facade-core+QiJianGongSi_Master+test42/,QiJianGongSi_Master-test42/superapp+superapp-facade-construction+QiJianGongSi_Master+test42/,QiJianGongSi_Master-test42/superapp+superapp-facade-user+QiJianGongSi_Master+test42/
+
+superapp-facade-chiq3ac_rele==QiJianGongSi_Master-test42/superapp+superapp-chiq3ac-service+QiJianGongSi_Master+test42/
+superapp-facade-fileupload_rele==QiJianGongSi_Master-test42/superapp+superapp-service-fileupload+QiJianGongSi_Master+test42/
+superapp-facade-banner_rele==QiJianGongSi_Master-test42/superapp+superapp-service-banner+QiJianGongSi_Master+test42/
+superapp-facade-device_rele==QiJianGongSi_Master-test42/superapp+superapp-service-device+QiJianGongSi_Master+test42/
+superapp-facade-cache_rele==QiJianGongSi_Master-test42/superapp+superapp-service-cache+QiJianGongSi_Master+test42/
+superapp-facade-core_rele==QiJianGongSi_Master-test42/superapp+superapp-service-core+QiJianGongSi_Master+test42/
+superapp-facade-homeappliance_rele==QiJianGongSi_Master-test42/superapp+superapp-homeappliance-service+QiJianGongSi_Master+test42/
+superapp-facade-construction_rele==QiJianGongSi_Master-test42/superapp+superapp-service-construction+QiJianGongSi_Master+test42/
+superapp-facade-elecard_rele==QiJianGongSi_Master-test42/superapp+superapp-service-elecard+QiJianGongSi_Master+test42/
+superapp-facade-user_rele==QiJianGongSi_Master-test42/superapp+superapp-service-user+QiJianGongSi_Master+test42/
+superapp-facade-littlemultyjoin_rele==QiJianGongSi_Master-test42/superapp+superapp-service-littlemultyjoin+QiJianGongSi_Master+test42/
+
+
+

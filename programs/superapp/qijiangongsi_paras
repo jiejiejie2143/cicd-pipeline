@@ -1,0 +1,31 @@
+#用项目名为前缀命名的参数为项目共用参数
+superapp_apollo=='PRO -Didc=light'
+superapp_addr==172.16.118.51
+superapp_start==1
+superapp_mem=='-Xmx512m -Xms512m -Xmn256m'
+
+#用应用名命名的参数为应用指定参数
+superapp-service-construction_mem=='-Xmx2048m -Xms2048m -Xmn512m'
+saserver_tomcat==tomcat-saserver-8180
+saboss_tomcat==tomcat-saboss-8280
+saboss_app_port==[8280]
+saserver_app_port==[8180]
+
+
+#项目关联，多个项目关联请用英文逗号分隔
+superapp-common_rele==QiJianGongSi_Master/superapp+superapp-facade-device+QiJianGongSi_Master+qijiangongsi,QiJianGongSi_Master/superapp+superapp-facade-cache+QiJianGongSi_Master+qijiangongsi,QiJianGongSi_Master/superapp+superapp-facade-core+QiJianGongSi_Master+qijiangongsi,QiJianGongSi_Master/superapp+superapp-facade-construction+QiJianGongSi_Master+qijiangongsi,QiJianGongSi_Master/superapp+superapp-facade-user+QiJianGongSi_Master+qijiangongsi
+
+superapp-facade-chiq3ac_rele==QiJianGongSi_Master/superapp+superapp-chiq3ac-service+QiJianGongSi_Master+qijiangongsi
+superapp-facade-fileupload_rele==QiJianGongSi_Master/superapp+superapp-service-fileupload+QiJianGongSi_Master+qijiangongsi
+superapp-facade-banner_rele==QiJianGongSi_Master/superapp+superapp-service-banner+QiJianGongSi_Master+qijiangongsi
+superapp-facade-device_rele==QiJianGongSi_Master/superapp+superapp-service-device+QiJianGongSi_Master+qijiangongsi
+superapp-facade-cache_rele==QiJianGongSi_Master/superapp+superapp-service-cache+QiJianGongSi_Master+qijiangongsi
+superapp-facade-core_rele==QiJianGongSi_Master/superapp+superapp-service-core+QiJianGongSi_Master+qijiangongsi
+superapp-facade-homeappliance_rele==QiJianGongSi_Master/superapp+superapp-homeappliance-service+QiJianGongSi_Master+qijiangongsi
+superapp-facade-construction_rele==QiJianGongSi_Master/superapp+superapp-service-construction+QiJianGongSi_Master+qijiangongsi
+superapp-facade-elecard_rele==QiJianGongSi_Master/superapp+superapp-service-elecard+QiJianGongSi_Master+qijiangongsi
+superapp-facade-user_rele==QiJianGongSi_Master/superapp+superapp-service-user+QiJianGongSi_Master+qijiangongsi
+superapp-facade-littlemultyjoin_rele==QiJianGongSi_Master/superapp+superapp-service-littlemultyjoin+QiJianGongSi_Master+qijiangongsi
+
+
+

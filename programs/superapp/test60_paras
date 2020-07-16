@@ -1,0 +1,40 @@
+#用项目名为前缀命名的参数为项目共用参数
+superapp_apollo=='FAT'
+superapp_addr==10.24.38.45
+superapp_start==1
+superapp_mem=='-Xmx128m -Xms128m -Xmn64m'
+
+#用应用名命名的参数为应用指定参数
+superapp-service-construction_mem=='-Xmx256m -Xms256m -Xmn128m'
+superapp-service-construction_mail==peihai1.yang@changhong.com,jie.yan@changhong.com,liang3.chen@changhong.com
+superapp-service-elecard_mem=='-Xmx256m -Xms256m -Xmn128m'
+superapp-service-banner_mem=='-Xmx256m -Xms256m -Xmn128m'
+saserver_mail==peihai1.yang@changhong.com,jie.yan@changhong.com,liang3.chen@changhong.com
+saboss_mail==peihai1.yang@changhong.com,jie.yan@changhong.com,liang3.chen@changhong.com
+saboss_addr==172.16.118.64
+saserver_addr==172.16.118.64
+saserver_tomcat==tomcat-saserver-8181
+saboss_tomcat==tomcat-saboss-8280
+saboss_app_port==[8280]
+saserver_app_port==[8181]
+
+
+
+
+#项目关联，多个项目关联请用英文逗号分隔
+superapp-common_rele==superapp-test-60/superapp+superapp-chiq3ac-facade+develop+test60,superapp-test-60/superapp+superapp-facade-fileupload+develop+test60,superapp-test-60/superapp+superapp-facade-banner+develop+test60,superapp-test-60/superapp+superapp-facade-device+develop+test60,superapp-test-60/superapp+superapp-facade-cache+develop+test60,superapp-test-60/superapp+superapp-facade-core+develop+test60,superapp-test-60/superapp+superapp-homeappliance-facade+develop+test60,superapp-test-60/superapp+superapp-facade-construction+develop+test60,superapp-test-60/superapp+superapp-facade-elecard+develop+test60,superapp-test-60/superapp+superapp-facade-user+develop+test60,superapp-test-60/superapp+superapp-facade-littlemultyjoin+develop+test60
+
+superapp-chiq3ac-facade_rele==superapp-test-60/superapp+superapp-chiq3ac-service+develop+test60
+superapp-facade-fileupload_rele==superapp-test-60/superapp+superapp-service-fileupload+develop+test60
+superapp-facade-banner_rele==superapp-test-60/superapp+superapp-service-banner+develop+test60
+superapp-facade-device_rele==superapp-test-60/superapp+superapp-service-device+develop+test60
+superapp-facade-cache_rele==superapp-test-60/superapp+superapp-service-cache+develop+test60
+superapp-facade-core_rele==superapp-test-60/superapp+superapp-service-core+develop+test60
+superapp-homeappliance-facade_rele==superapp-test-60/superapp+superapp-homeappliance-service+develop+test60
+superapp-facade-construction_rele==superapp-test-60/superapp+superapp-service-construction+develop+test60
+superapp-facade-elecard_rele==superapp-test-60/superapp+superapp-service-elecard+develop+test60
+superapp-facade-user_rele==superapp-test-60/superapp+superapp-service-user+develop+test60
+superapp-facade-littlemultyjoin_rele==superapp-test-60/superapp+superapp-service-littlemultyjoin+develop+test60
+
+
+

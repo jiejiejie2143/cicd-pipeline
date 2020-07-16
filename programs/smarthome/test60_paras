@@ -1,0 +1,29 @@
+#用项目名为前缀命名的参数为项目共用参数
+smarthome_apollo=='FAT'
+smarthome_addr==10.24.38.45
+smarthome_start==1
+smarthome_mem=='-Xmx128m -Xms128m -Xmn64m'
+
+#用应用名命名的参数为应用指定参数
+superapp-service-construction_mem=='-Xmx800m -Xms800m -Xmn400m'
+superapp-service-elecard_mem=='-Xmx256m -Xms256m -Xmn128m'
+
+saboss_addr==172.16.118.64
+saserver_addr==172.16.118.64
+
+saserver_tomcat==tomcat-saserver-8181
+saboss_tomcat==tomcat-saboss-8280
+saboss_app_port==[8280]
+saserver_app_port==[8181]
+
+#项目关联，多个项目关联请用英文逗号分隔
+
+#项目关联，多个项目关联请用英文逗号分隔
+superapp-common_rele==smarthome-test60-release-v2.0.1/smarthome+superapp-chiq3ac-facade+release-v2.0.1+test60+package,smarthome-test60-release-v2.0.1/smarthome+superapp-facade-construction+release-v2.0.1+test60+package,smarthome-test60-release-v2.0.1/smarthome+superapp-facade-elecard+release-v2.0.1+test60+package,smarthome-test60-release-v2.0.1/smarthome+superapp-facade-joinservice+release-v2.0.1+test60+package,smarthome-test60-release-v2.0.1/smarthome+superapp-facade-tool+release-v2.0.1+test60+package
+
+superapp-chiq3ac-facade_rele==smarthome-test60-release-v2.0.1/smarthome+superapp-chiq3ac-service+release-v2.0.1+test60+package
+superapp-facade-construction_rele==smarthome-test60-release-v2.0.1/smarthome+superapp-service-construction+release-v2.0.1+test60+package
+superapp-facade-elecard_rele==smarthome-test60-release-v2.0.1/smarthome+superapp-service-elecard+release-v2.0.1+test60+package
+superapp-facade-joinservice_rele==smarthome-test60-release-v2.0.1/smarthome+superapp-service-joinservice+release-v2.0.1+test60+package
+superapp-facade-tool_rele==smarthome-test60-release-v2.0.1/smarthome+superapp-service-tool+release-v2.0.1+test60+package
+

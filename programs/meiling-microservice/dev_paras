@@ -1,18 +1,18 @@
 #用项目名为前缀命名的参数为项目共用参数
-meiling-microservice_apollo==FAT
-meiling-microservice_addr==172.16.118.64
+meiling-microservice_apollo==FAT -Didc=develop
+meiling-microservice_addr==172.16.118.54
 meiling-microservice_start==1
 meiling-microservice_mem==-Xmx128m -Xms128m -Xmn64m
 
 #k8s特定参数
-meiling-microservice_namespace==meiling-test
-microservice-databoard-core_app_port==9992
-microservice-sleepac-core_app_port==9999
-microservice-acupdate-core_app_port==9999
-microservice-bwfuse-core_app_port==8080
-microservice-washer-core_app_port==9999
+meiling-microservice_namespace==meiling-dev
+meiling-microservice_app_port==9999
+
 
 #用应用名命名的参数为应用指定参数
+microservice-gateway-core_app_port==10000
+microservice-elecmenu-core_app_port==9997
+
 microservice-gateway-core_mem==-Xmx512m -Xms512m -Xmn256m
 microservice-gateway-core_addr==172.16.118.64
 
@@ -24,6 +24,9 @@ microservice-tsl-core_mem==-Xmx128m -Xms128m -Xmn64m
 
 microservice-iotpaas-core_addr==172.16.118.64
 microservice-iotpaas-core_mem==-Xmx512m -Xms512m -Xmn256m
+
+microservice-locator-core_addr==172.16.118.54
+microservice-locator-core_mem==-Xmx512m -Xms512m -Xmn256m
 
 microservice-mcontrol-core_addr==172.16.118.64
 microservice-mcontrol-core_mem==-Xmx512m -Xms512m -Xmn256m

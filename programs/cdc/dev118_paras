@@ -1,0 +1,16 @@
+#用项目名为前缀命名的参数为项目共用参数
+cdc_apollo=='FAT -Didc=develop'
+cdc_addr==10.165.109.118
+cdc_start==1
+cdc_mem=='-Xmx128m -Xms128m -Xmn64m'
+
+#用应用名命名的参数为应用指定参数
+cdc-whitegoods_tomcat==tomcat-cdc-whitegoods-8380
+cdc-whitegoods_app_port==[8380]
+
+#项目关联，多个项目关联请用英文逗号分隔
+cdc-common_rele==cdc-dev118/cdc+cdc-facade-app+dev-2020320chengliang+dev118,cdc-dev118/cdc+cdc-facade-cloud+dev-2020320chengliang+dev118,cdc-dev118/cdc+cdc-facade-device+dev-2020320chengliang+dev118,cdc-dev118/cdc+mqtt-push-facade+dev-2020320chengliang+dev118
+cdc-facade-app_rele==cdc-dev118/cdc+cdc-service-app+dev-2020320chengliang+dev118
+cdc-facade-cloud_rele==cdc-dev118/cdc+cdc-service-cloud+dev-2020320chengliang+dev118
+cdc-facade-device_rele==cdc-dev118/cdc+cdc-service-device+dev-2020320chengliang+dev118
+mqtt-push-facade_rele==cdc-dev118/cdc+mqtt-push-service+dev-2020320chengliang+dev118

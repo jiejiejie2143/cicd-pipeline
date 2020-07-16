@@ -1,0 +1,10 @@
+#用项目名为前缀命名的参数为项目共用参数
+meiling-microservice-scene_apollo==FAT
+meiling-microservice-scene_addr==10.24.38.45
+meiling-microservice-scene_start==1
+meiling-microservice-scene_mem=='-Xmx128m -Xms128m -Xmn64m'
+
+#用应用名命名的参数为应用指定参数
+
+#项目关联，多个项目关联请用英文逗号分隔
+

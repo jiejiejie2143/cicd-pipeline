@@ -1,0 +1,166 @@
+- hosts: hosts
+  gather_facts: false
+  remote_user: "{{ deploy_user }}"
+  tasks:
+###  jar变量传参 :  app_info  deploy_user   app_dir    app_name    choose_rpm_path     start_num
+###  war变量传参 :  app_info  deploy_user   app_dir    app_name    choose_rpm_path     app_port
+    - name: 创建远程目录并授权(war包工程请提前准备好tomcat目录)
+      file:
+        path: "{{ app_dir }}"
+        state: directory
+        mode: 0755
+        owner: admin
+        group: admin
+      become: yes
+      become_user: root
+
+    - name: 获取需要发布服务的pid
+      shell: ps -ef |grep  {{ app_dir }}  | grep -v 'grep' |grep -v -w 'tail'|grep -v 'ansible-playbook'| awk '{print $2}'
+      register: pid
+
+    - name: 需要发布服务之前的pid如下
+      debug:
+        var: pid.stdout_lines
+
+    - name: 负载均衡下线该服务(nginx,nacos?)
+      shell: echo "nginx,nacos是否需要下线服务"
+
+    - name: 杀死之前的服务
+      shell: kill -9 {{ pid.stdout }}
+      become: yes
+      become_user: root
+      when:
+        - pid.stdout != ""
+
+    - name: 删除项目目录下相关文件(war)
+      file:
+        path: "{{ app_dir }}/webapps/{{ item }}"
+        state: absent
+      with_items:
+        - "{{ app_name }}.war"
+        - "{{ app_name }}"
+      register: files_status
+      when:
+        - app_info == "war"
+
+    - name: 删除项目目录下相关文件(jar)
+      file:
+        path: "{{ app_dir }}/{{ item }}"
+        state: absent
+      with_items:
+        - "{{ app_name }}.jar"
+        - "lib"
+      register: files_status
+      when:
+        - app_info == "jar"
+
+    - name: 解压需要发布的包到对应目录（war）
+      unarchive:
+        src: "{{ choose_rpm_path }}"
+        dest: "{{ app_dir }}/webapps/"
+        copy: yes
+      when:
+        - app_info == "war"
+
+    - name: 解压需要发布的包到对应目录（jar）
+      unarchive:
+        src: "{{ choose_rpm_path }}"
+        dest: "{{ app_dir }}"
+        copy: yes
+      when:
+        - app_info == "jar"
+
+    - name: 获取解压后文件md5
+      shell: md5sum  {{ app_dir }}/{{ app_name }}.{{ app_info }} |awk '{print $1}'
+      register: md5sum
+
+    - name: 显示解压后文件md5（jar）
+      debug:
+        var: md5sum.stdout_lines
+
+    - name: 再次确保项目目录权限正确
+      file:
+        path: "{{ app_dir }}"
+        state: directory
+        mode: 0755
+        owner: admin
+        group: admin
+        recurse: yes
+      become: yes
+      become_user: root
+
+    - name: 再次确保日志目录权限正确
+      file:
+        path: "/data/logs"
+        state: directory
+        owner: admin
+        group: admin
+        recurse: yes
+      ignore_errors: True
+      become: yes
+      become_user: root
+
+    - name: 处理applo环境配置参数（war）
+      copy:
+        src: server.properties
+        dest: /opt/settings/server.properties
+        mode: 0755
+        owner: admin
+        group: admin
+      ignore_errors: True
+      when:
+        - app_info == "war"
+
+    - name: 启动服务（war）
+      shell: nohup {{ app_dir }}/bin/catalina.sh start &
+      register: start
+      when:
+        - app_info == "war"
+
+    - name: 显示重启结果（war）
+      debug:
+        var: start.stdout_lines
+      when:
+        - app_info == "war"
+
+    - name: 拷贝脚本到远程（jar）
+      copy:
+        src: start_jar.sh
+        dest: "{{ app_dir }}"
+        mode: 0755
+        owner: admin
+        group: admin
+      when:
+        - app_info == "jar"
+      tags: start-jar
+
+    - name: 启动服务（jar）
+      shell: sh  {{ app_dir }}/start_jar.sh
+      register: start
+      when:
+        - app_info == "jar"
+      tags: start-jar
+
+    - name: 显示重启结果（jar）
+      debug:
+        var: start.stdout_lines
+      when:
+        - app_info == "jar"
+
+    - name: 检查服务端口是否存活port(war)
+      shell: sleep 6;sudo ss -natulp | grep {{ item }}
+      with_items:
+        - "{{ app_port }}"
+      register: portcheck
+      when:
+        - app_info == "war"
+      tags: port-check1
+
+    - name: 显示端口存活状态(war)
+      debug:
+        msg: "{{ item.stdout_lines }}"
+      with_items:
+        - "{{ portcheck.results }}"
+      when:
+        - app_info == "war"
+      tags: port-check2

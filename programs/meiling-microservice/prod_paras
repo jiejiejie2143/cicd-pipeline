@@ -1,2 +1,15 @@
-meiling-microservice_k8sconfig=prod
-meiling-microservice_registry_namespace=prod
+#k8s特定参数
+meiling-microservice_namespace==meiling-microservice
+
+meiling-microservice_apollo==PRO
+
+meiling-microservice_mem==-Xmx256m -Xms256m -Xmn128m
+
+#生产环境默认健康检查端口9999（固定）
+meiling-microservice_app_port==9999
+
+
+#用应用名命名的参数为应用指定参数
+icroservice-iotpaas-core_mem==-Xmx512m -Xms512m -Xmn256m
+microservice-databoard-core_mem==-Xmx512m -Xms512m -Xmn256m
+microservice-gateway-core_app_port==10000

@@ -1,0 +1,26 @@
+#用项目名为前缀命名的参数为项目共用参数
+superapp_apollo=='FAT -Didc=develop'
+superapp_addr==10.27.8.117
+superapp_start==1
+superapp_mem=='-Xmx128m -Xms128m -Xmn64m'
+
+#用应用名命名的参数为应用指定参数
+superapp-service-construction_mem=='-Xmx512m -Xms512m -Xmn256m  -javaagent:/agent/agent/skywalking-agent.jar -Dagent.service_name=superapp-service-construction'
+superapp-service-elecard_mem=='-Xmx512m -Xms512m -Xmn256m -javaagent:/agent/agent/skywalking-agent.jar=agent.service_name=superapp-service-elecard'
+saserver_tomcat==tomcat-saserver-8180
+saboss_tomcat==tomcat-saboss-8280
+saboss_app_port==[8280]
+saserver_app_port==[8180]
+
+
+
+#项目关联，多个项目关联请用英文逗号分隔
+superapp-common_rele==superapp-dev114/superapp+superapp-chiq3ac-facade+dev-2020320chengliang+dev114,superapp-dev114/superapp+superapp-facade-construction+dev-2020320chengliang+dev114,superapp-dev114/superapp+superapp-facade-elecard+dev-2020320chengliang+dev114,superapp-dev114/superapp+superapp-facade-joinservice+dev-2020320chengliang+dev114,superapp-dev114/superapp+superapp-facade-tool+dev-2020320chengliang+dev114
+
+superapp-chiq3ac-facade_rele==superapp-dev114/superapp+superapp-chiq3ac-service+dev-2020320chengliang+dev114
+superapp-facade-construction_rele==superapp-dev114/superapp+superapp-service-construction+dev-2020320chengliang+dev114
+superapp-facade-elecard_rele==superapp-dev114/superapp+superapp-service-elecard+dev-2020320chengliang+dev114
+superapp-facade-joinservice_rele==superapp-dev114/superapp+superapp-service-joinservice+dev-2020320chengliang+dev114
+superapp-facade-tool_rele==superapp-dev114/superapp+superapp-service-tool+dev-2020320chengliang+dev114
+
+

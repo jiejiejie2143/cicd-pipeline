@@ -1,0 +1,11 @@
+#用项目名为前缀命名的参数为项目共用参数
+xdboss_apollo==PRO
+xdboss_addr==172.16.200.233
+xdboss_start==1
+xdboss_mem=='-Xmx600m -Xms600m -Xmn256m'
+
+#用应用名命名的参数为应用指定参数
+xdboss_tomcat==tomcat-xdboss-9280
+xdboss_app_port==[9280]
+
+#项目关联，多个项目关联请用英文逗号分隔

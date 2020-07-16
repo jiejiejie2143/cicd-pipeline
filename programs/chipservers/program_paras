@@ -1,11 +1,13 @@
 #用项目名为前缀命名的参数为项目共用参数
-cdc_program==ssh://git@ngrok.local.mymlsoft.com:2222/cloud/cdc-center.git
+chipservers_program==ssh://git@ngrok.local.mymlsoft.com:2222/cloud/chipservers.git
 #appinfo可选参数，jar/war
-cdc_appinfo==jar
+chipservers_appinfo==jar
 #pom文件层级
-cdc_pom==1
-common_deploy_pom==0
+chipservers_pom==1
+
 #用应用名命名的参数为应用指定参数
 
 #appinfo可选参数，jar/war
-cdc-whitegoods_appinfo==war
+chipserver_appinfo==war
+chipboss_appinfo==war
+

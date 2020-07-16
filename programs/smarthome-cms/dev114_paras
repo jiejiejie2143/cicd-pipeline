@@ -1,0 +1,10 @@
+#用项目名为前缀命名的参数为项目共用参数
+saboss_apollo=='FAT -Didc=develop'
+saboss_addr==10.27.8.117
+saboss_start==1
+saboss_mem=='-Xmx128m -Xms128m -Xmn64m'
+
+#用应用名命名的参数为应用指定参数
+saboss_tomcat==tomcat-saboss-8280
+saboss_app_port==[8280]
+#项目关联，多个项目关联请用英文逗号分隔
