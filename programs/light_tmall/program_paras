@@ -1,5 +1,5 @@
 #light_tmall  git是light_tmall  war包是light-tmall
-light-tmall_program==ssh://git@ngrok.local.mymlsoft.com:2222/cloud/light_tmall.git
+light-tmall_program==ssh://git@ngrok.local.XXXXX.com:2222/cloud/light_tmall.git
 light-tmall_pom==0
 #appinfo可选参数，jar/war/deploy
 light-tmall_appinfo==war

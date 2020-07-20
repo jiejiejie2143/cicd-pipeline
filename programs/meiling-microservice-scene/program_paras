@@ -1,5 +1,5 @@
 #用项目名为前缀命名的参数为项目共用参数
-meiling-microservice-scene_program==ssh://git@ngrok.local.mymlsoft.com:2222/cloud/meiling-microservice-scene.git
+meiling-microservice-scene_program==ssh://git@ngrok.local.XXXXX.com:2222/cloud/meiling-microservice-scene.git
 
 
 #appinfo可选参数，jar/war

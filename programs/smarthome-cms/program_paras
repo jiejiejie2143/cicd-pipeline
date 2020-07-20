@@ -1,5 +1,5 @@
 #用项目名为前缀命名的参数为项目共用参数
-saboss_program==ssh://git@ngrok.local.mymlsoft.com:2222/cloud/smarthome-cms.git
+saboss_program==ssh://git@ngrok.local.XXXXX.com:2222/cloud/smarthome-cms.git
 #appinfo可选参数，jar/war
 saboss_appinfo==war
 #pom文件层级

@@ -1,5 +1,5 @@
 #用项目名为前缀命名的参数为项目共用参数
-cdc_program==ssh://git@ngrok.local.mymlsoft.com:2222/cloud/cdc-center.git
+cdc_program==ssh://git@ngrok.local.XXXXX.com:2222/cloud/cdc-center.git
 #appinfo可选参数，jar/war
 cdc_appinfo==jar
 #pom文件层级

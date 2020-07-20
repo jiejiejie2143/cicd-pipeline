@@ -1,5 +1,5 @@
 #用项目名为前缀命名的参数为项目共用参数
-datacenter_program==ssh://git@ngrok.local.mymlsoft.com:2222/cloud/data-center.git
+datacenter_program==ssh://git@ngrok.local.XXXXX.com:2222/cloud/data-center.git
 #appinfo可选参数，jar/war
 datacenter_appinfo==jar
 #pom文件层级
